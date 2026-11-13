@@ -1,0 +1,1178 @@
+/* =========================================================
+   MINIBLOX RUN (ANTI-GRAVITY) — ESTILO NEOBRUTALISTA
+   ========================================================= */
+
+:root {
+    --bg: #fff3d1;
+    --card: #ffffff;
+    --ink: #111111;
+    --yellow: #ffde59;
+    --cyan: #5ce1e6;
+    --lime: #7ed957;
+    --coral: #ff5757;
+    --purple: #8c52ff;
+    --shadow-sm: 3px 3px 0 #111111;
+    --shadow-md: 5px 5px 0 #111111;
+    --shadow-lg: 8px 8px 0 #111111;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+}
+
+.app-shell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   TOP BAR & BOTÕES
+   ========================================================= */
+
+.top-bar {
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 16px;
+    background: var(--yellow);
+    border-bottom: 4px solid var(--ink);
+}
+
+.top-bar-title {
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.btn-neo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--ink);
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-md);
+    border-radius: 10px;
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+
+.btn-neo:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+}
+
+.btn-neo:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 var(--ink);
+}
+
+.btn-small {
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+}
+
+.btn-play {
+    background: var(--lime);
+    font-size: 1.2rem;
+    padding: 15px 36px;
+}
+
+.btn-cyan { background: var(--cyan); }
+.btn-secondary { background: #ffffff; }
+
+/* =========================================================
+   TELAS
+   ========================================================= */
+
+.screen {
+    position: relative;
+    flex: 1;
+    display: none;
+    width: 100%;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* =========================================================
+   TELA INICIAL
+   ========================================================= */
+
+.start-screen {
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-y: auto;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(92, 225, 230, 0.4) 0%, transparent 34%),
+        radial-gradient(circle at 88% 82%, rgba(140, 82, 255, 0.28) 0%, transparent 36%),
+        var(--bg);
+}
+
+.start-card {
+    width: 100%;
+    max-width: 860px;
+    background: var(--card);
+    border: 4px solid var(--ink);
+    box-shadow: var(--shadow-lg);
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge-pill {
+    background: var(--purple);
+    color: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.game-logo {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+}
+
+.logo-box {
+    display: inline-block;
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    padding: 2px 12px;
+    transform: rotate(-2deg);
+}
+
+.mechanic-demo {
+    width: 100%;
+    background: #f1f5f9;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.demo-track {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+
+.demo-ceiling, .demo-floor {
+    padding: 4px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+}
+
+.demo-ceiling { background: #334155; color: #ffde59; }
+.demo-floor { background: #7ed957; color: #111; }
+.demo-arrow {
+    background: var(--cyan);
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+.mechanic-demo p {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.start-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 18px;
+}
+
+.hero-preview-card {
+    background: linear-gradient(180deg, #8ee3ff 0%, #d8f6ff 66%, #7ed957 66%);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-md);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 245px;
+}
+
+.menu-char-mount {
+    position: relative;
+    width: 120px;
+    height: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-char-mount .personagem {
+    transform: scale(0.55);
+    transform-origin: center center;
+}
+
+.player-badge {
+    width: 100%;
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    padding: 6px 10px;
+    text-align: center;
+}
+
+.player-badge span {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    opacity: 0.7;
+}
+
+.player-badge strong {
+    font-size: 1rem;
+    font-weight: 800;
+    word-break: break-word;
+}
+
+.menu-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.stat-box {
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-record { background: var(--yellow); }
+.stat-coins { background: var(--cyan); }
+
+.stat-box span {
+    font-size: 0.74rem;
+    font-weight: 800;
+}
+
+.stat-box strong {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.difficulty-box, .controls-box {
+    background: #f8fafc;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    padding: 10px 14px;
+}
+
+.section-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+}
+
+.difficulty-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.diff-btn {
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 9px 8px;
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.15s ease;
+}
+
+.diff-btn:hover {
+    transform: translate(-1px, -1px);
+}
+
+.diff-btn.active[data-diff="facil"] { background: var(--lime); }
+.diff-btn.active[data-diff="medio"] { background: var(--yellow); }
+.diff-btn.active[data-diff="dificil"] { background: var(--coral); color: #fff; }
+
+.controls-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.84rem;
+    font-weight: 600;
+}
+
+kbd {
+    display: inline-block;
+    background: #fff;
+    border: 2px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.76rem;
+}
+
+/* =========================================================
+   PERSONAGEM MINIBLOX (FIEL AO VESTIARIO.CSS)
+   ========================================================= */
+
+@keyframes piscar {
+    0%, 90%, 100% { transform: scaleY(1); }
+    93% { transform: scaleY(0.1); }
+    96% { transform: scaleY(1); }
+}
+
+.personagem {
+    /* Camisas de time */
+    --flamengo: repeating-linear-gradient(180deg, black 0px, black 10px, rgb(255, 47, 47) 10px, rgb(247, 49, 49) 20px);
+    --palmeiras: repeating-linear-gradient(90deg, #24af59 0px, #24af59 10px, #f1f1f1 10px, #f1f1f1 20px);
+    --corinthians: repeating-linear-gradient(90deg, black 0px, black 10px, white 10px, white 20px);
+    --fluminense: repeating-linear-gradient(90deg, #7b1535 0px, #7b1535 15px, white 15px, white 25px, #006b45 25px, #006b45 40px, white 40px, white 50px);
+    --sao-paulo: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 10px, #d71920 10px, #d71920 20px, #000000 20px, #000000 30px);
+    --bahia: repeating-linear-gradient(90deg, #005ca9 0px, #005ca9 10px, #ffffff 10px, #ffffff 20px, #d71920 20px, #d71920 30px);
+    --botafogo: repeating-linear-gradient(90deg, #000000 0px, #000000 10px, #ffffff 10px, #ffffff 20px);
+    --vasco: repeating-linear-gradient(90deg, #000000 0px, #000000 15px, #ffffff 15px, #ffffff 20px);
+    --gremio: repeating-linear-gradient(90deg, #0072bc 0px, #0072bc 10px, #000000 10px, #000000 20px, #ffffff 20px, #ffffff 30px);
+    --santos: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 15px, #111111 15px, #111111 20px);
+    --mirassol: repeating-linear-gradient(90deg, #008b45 0px, #008b45 10px, #ffdf00 10px, #ffdf00 20px);
+    --internacional: linear-gradient(180deg, #d71920 0%, #d71920 75%, #ffffff 75%, #ffffff 80%, #d71920 80%, #d71920 100%);
+
+    /* Camisas casuais */
+    --azul: rgb(94, 152, 190);
+    --vermelha: rgb(238, 59, 59);
+    --preta: rgb(35, 35, 37);
+    --branca: rgb(230, 230, 230);
+    --roxa: purple;
+    --amarela: rgb(255, 217, 0);
+    --verde: rgb(204, 238, 55);
+    --rosa: rgb(255, 82, 111);
+
+    position: relative;
+    width: 120px;
+    height: 280px;
+    --pele: rgb(240, 177, 140);
+    --cabelo: rgb(139, 57, 57);
+    --calca: rgb(51, 31, 99);
+}
+
+.corpo {
+    background: var(--camisa, var(--preta));
+    width: 80px;
+    height: 100px;
+    border-radius: 15px 15px 0 0;
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    z-index: 2;
+    border: 2px solid #111;
+    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.15), inset -2px -2px 4px rgba(0, 0, 0, 0.3);
+    transform-origin: center bottom;
+}
+
+.cabeca, .braco-direito, .braco-esquerdo {
+    background: var(--pele);
+    border: 2px solid #111;
+    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.6), inset -2px -2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cabeca {
+    height: 80px;
+    width: 80px;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 10;
+}
+
+.cabelo {
+    height: 20px;
+    width: 76px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 13px 13px 0 0;
+}
+
+.cabelo::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 76px;
+    height: 17px;
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 85% 100%, 70% 65%, 55% 100%, 40% 65%, 25% 100%, 10% 65%, 0 85%);
+}
+
+.cabelo, .cabelo::after {
+    background: var(--cabelo);
+}
+
+.cabelo-feminino {
+    display: none;
+    position: absolute;
+    top: -4px;
+    left: -5px;
+    width: 86px;
+    height: 100px;
+    z-index: 3;
+}
+
+.cabelo-feminino::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 4px;
+    width: 78px;
+    height: 30px;
+    border-radius: 40px 40px 8px 8px;
+}
+
+.cabelo-feminino::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 6px;
+    width: 74px;
+    height: 17px;
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 85% 100%, 70% 65%, 55% 100%, 40% 65%, 25% 100%, 10% 65%, 0 85%);
+}
+
+.mecha-esquerda, .mecha-direita {
+    position: absolute;
+    top: 3px;
+    width: 14px;
+    height: 75px;
+    border-radius: 20px 20px 0 10px;
+}
+
+.mecha-esquerda { left: 0; }
+.mecha-direita { right: 0; }
+
+.cabelo-feminino::after, .cabelo-feminino::before, .mecha-direita, .mecha-esquerda {
+    background: var(--cabelo);
+}
+
+.personagem.masculino .cabelo { display: block; }
+.personagem.masculino .cabelo-feminino { display: none; }
+.personagem.feminino .cabelo { display: none; }
+.personagem.feminino .cabelo-feminino { display: block; }
+
+.olho-esquerdo, .olho-direito {
+    background: #111;
+    height: 22px;
+    width: 8px;
+    border-radius: 3px;
+    position: absolute;
+    top: 30px;
+    animation: piscar 4s infinite;
+}
+
+.olho-esquerdo { left: 18px; }
+.olho-direito { right: 18px; }
+
+.braco-esquerdo, .braco-direito {
+    width: 20px;
+    height: 88px;
+    position: absolute;
+    top: 2px;
+    transform-origin: top center;
+}
+
+.braco-esquerdo { left: -21px; border-radius: 8px 4px 5px 5px; }
+.braco-direito { right: -21px; border-radius: 4px 8px 5px 5px; }
+
+.pernas {
+    position: absolute;
+    top: 180px;
+    left: 20px;
+    width: 80px;
+    height: 100px;
+    z-index: 1;
+}
+
+.perna-esquerda, .perna-direita {
+    background: var(--calca);
+    width: 35px;
+    height: 98px;
+    position: absolute;
+    border-radius: 0 0 7px 7px;
+    border: 2px solid #111;
+    transform-origin: top center;
+}
+
+.perna-esquerda { left: 0; }
+.perna-direita { right: 0; }
+
+/* Animações do personagem */
+.personagem.running .cabeca { animation: headBob 0.34s ease-in-out infinite; }
+.personagem.running .corpo { animation: bodyLean 0.34s ease-in-out infinite; }
+.personagem.running .perna-esquerda { animation: legA 0.34s ease-in-out infinite; }
+.personagem.running .perna-direita { animation: legB 0.34s ease-in-out infinite; }
+.personagem.running .braco-esquerdo { animation: armA 0.34s ease-in-out infinite; }
+.personagem.running .braco-direito { animation: armB 0.34s ease-in-out infinite; }
+
+@keyframes headBob {
+    0%, 100% { transform: translateY(0) rotate(2deg); }
+    50% { transform: translateY(5px) rotate(5deg); }
+}
+
+@keyframes bodyLean {
+    0%, 100% { transform: translateY(0) rotate(4deg); }
+    50% { transform: translateY(4px) rotate(7deg); }
+}
+
+@keyframes legA {
+    0%, 100% { transform: rotate(28deg); }
+    50% { transform: rotate(-28deg); }
+}
+
+@keyframes legB {
+    0%, 100% { transform: rotate(-28deg); }
+    50% { transform: rotate(28deg); }
+}
+
+@keyframes armA {
+    0%, 100% { transform: rotate(-30deg); }
+    50% { transform: rotate(30deg); }
+}
+
+@keyframes armB {
+    0%, 100% { transform: rotate(30deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+.personagem.flipping .braco-esquerdo { transform: rotate(135deg); }
+.personagem.flipping .braco-direito { transform: rotate(-135deg); }
+.personagem.flipping .perna-esquerda { transform: rotate(22deg) scaleY(0.88); }
+.personagem.flipping .perna-direita { transform: rotate(-22deg) scaleY(0.88); }
+
+.personagem.crashed {
+    animation: crashSpin 0.55s ease-out forwards;
+}
+
+@keyframes crashSpin {
+    0% { filter: brightness(1.6); }
+    100% { transform: rotate(-42deg) translateY(14px); opacity: 0.8; }
+}
+
+/* =========================================================
+   TELA DO JOGO & CENÁRIO HORIZONTAL (CHÃO + TETO)
+   ========================================================= */
+
+.game-screen {
+    position: relative;
+    background: #67c7ff;
+    backdrop-filter: saturate(6);
+}
+
+.hud {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    z-index: 30;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    pointer-events: none;
+    
+}
+
+.hud-pill {
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    padding: 5px 12px;
+    display: flex;
+    flex-direction: column;
+    min-width: 88px;
+}
+
+.hud-pill span {
+    font-size: 0.65rem;
+    font-weight: 800;
+    opacity: 0.72;
+}
+
+.hud-pill strong {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.hud-coins { background: var(--yellow); }
+.hud-best { background: var(--cyan); }
+.hud-diff { background: var(--lime); margin-left: auto; }
+
+.arena {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.arena.shake {
+    animation: arenaShake 0.38s ease;
+}
+
+@keyframes arenaShake {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-10px, 6px); }
+    40% { transform: translate(10px, -6px); }
+    60% { transform: translate(-6px, -4px); }
+    80% { transform: translate(6px, 4px); }
+}
+
+.sky-layer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #52bfff 0%, #b8ebff 100%);
+    overflow: hidden;
+}
+
+/* Escurecimento exclusivo do cenário */
+.sky-layer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 15, 35, 0.38);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.sun {
+    position: absolute;
+    top: 14%;
+    right: 10%;
+    width: 58px;
+    height: 58px;
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 50%;
+}
+
+.parallax-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    border-radius: 999px;
+}
+
+.bg-building {
+    position: absolute;
+    bottom: 56px;
+    border: 3px solid var(--ink);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    opacity: 0.85;
+}
+
+.bg-prop {
+    position: absolute;
+    bottom: 56px;
+}
+
+.prop-tree .trunk {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    width: 14px;
+    height: 30px;
+    background: #8b5a2b;
+    border: 2px solid var(--ink);
+}
+
+.prop-tree .crown {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    width: 46px;
+    height: 50px;
+    background: #22c55e;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+}
+
+.prop-lamp .pole {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 6px;
+    height: 76px;
+    background: #64748b;
+    border: 2px solid var(--ink);
+}
+
+.prop-lamp .head {
+    position: absolute;
+    bottom: 72px;
+    left: 2px;
+    width: 22px;
+    height: 12px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: 5px;
+}
+
+/* Superfícies (Teto e Chão) */
+.surface {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 56px;
+    z-index: 15;
+    overflow: hidden;
+}
+
+.ceiling-surface {
+    top: 0;
+    background: #1e293b;
+    border-bottom: 4px solid var(--ink);
+}
+
+.floor-surface {
+    bottom: 0;
+    background: #334155;
+    border-top: 4px solid var(--ink);
+}
+
+.surface-pattern {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+}
+
+.ceiling-pattern {
+    background: repeating-linear-gradient(
+        -45deg,
+        #1e293b 0px,
+        #1e293b 24px,
+        #ffde59 24px,
+        #ffde59 36px
+    );
+    height: 14px;
+    top: auto;
+    bottom: 0;
+    border-top: 3px solid var(--ink);
+}
+
+.floor-pattern {
+    background: repeating-linear-gradient(
+        90deg,
+        #7ed957 0px,
+        #7ed957 42px,
+        #5cc437 42px,
+        #5cc437 84px
+    );
+    height: 14px;
+    bottom: auto;
+    top: 0;
+    border-bottom: 3px solid var(--ink);
+}
+
+/* Camadas de entidades */
+.entities-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 18;
+}
+
+/* Jogador na pista */
+.player-wrap {
+    position: absolute;
+    z-index: 20;
+    pointer-events: none;
+    transform-origin: center center;
+}
+
+.player-char-mount {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-char-mount .personagem {
+    transform-origin: center center;
+}
+
+/* =========================================================
+   OBSTÁCULOS & MOEDAS
+   ========================================================= */
+
+.obstacle {
+    position: absolute;
+    border: 3px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.obstacle.on-ceiling {
+    box-shadow: 3px -3px 0 var(--ink);
+}
+
+.obs-caixa {
+    background: #d97706;
+    border-radius: 6px;
+}
+
+.obs-cone {
+    background: repeating-linear-gradient(180deg, #ff5722 0 10px, #fff 10px 18px);
+    border-radius: 12px 12px 4px 4px;
+}
+
+.obs-barreira {
+    background: repeating-linear-gradient(-45deg, #ffde59 0 10px, #111 10px 20px);
+    border-radius: 6px;
+}
+
+.obs-lixeira {
+    background: #16a34a;
+    border-radius: 6px;
+}
+
+.obs-pedra {
+    background: #94a3b8;
+    border-radius: 40% 50% 25% 30%;
+}
+
+.obs-placa {
+    background: #ff5757;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.obs-veiculo {
+    background: #ef4444;
+    border-radius: 12px 12px 6px 6px;
+}
+
+.obs-estrutura {
+    background: #64748b;
+    border-radius: 4px;
+}
+
+/* Moedas */
+.coin {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 35% 30%, #fff7b0, #facc15 65%, #ca8a04);
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    box-shadow: 2px 2px 0 var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: #713f12;
+    animation: coinSpin 0.8s linear infinite;
+}
+
+@keyframes coinSpin {
+    0%, 100% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+}
+
+.coin-pop {
+    position: absolute;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #facc15;
+    text-shadow: -2px -2px 0 #111, 2px -2px 0 #111, -2px 2px 0 #111, 2px 2px 0 #111;
+    animation: popUp 0.6s ease-out forwards;
+}
+
+@keyframes popUp {
+    0% { opacity: 1; transform: translateY(0) scale(0.9); }
+    100% { opacity: 0; transform: translateY(-42px) scale(1.2); }
+}
+
+/* Botão touch na pista */
+.touch-invert-btn {
+    position: absolute;
+    right: 16px;
+    bottom: 72px;
+    z-index: 28;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.95rem;
+    background: rgba(255, 222, 89, 0.94);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+.touch-invert-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--ink);
+}
+
+/* =========================================================
+   MENSAGEM PERSONALIZADA DE INÍCIO
+   ========================================================= */
+
+.start-banner {
+    position: absolute;
+    inset: 0;
+    z-index: 35;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(17, 17, 17, 0.25);
+    pointer-events: none;
+}
+
+.start-banner.show {
+    display: flex;
+    animation: bannerAnim 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.start-banner-text {
+    background: var(--yellow);
+    color: var(--ink);
+    border: 4px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    border-radius: 16px;
+    padding: 16px 32px;
+    font-size: clamp(1.6rem, 5vw, 3.1rem);
+    font-weight: 800;
+    text-align: center;
+    transform: rotate(-2deg);
+}
+
+@keyframes bannerAnim {
+    0% { opacity: 0; transform: scale(0.6); }
+    18% { opacity: 1; transform: scale(1.08); }
+    28% { opacity: 1; transform: scale(1); }
+    82% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
+}
+
+/* =========================================================
+   GAME OVER
+   ========================================================= */
+
+.gameover-screen {
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(17, 17, 17, 0.72);
+}
+
+.gameover-card {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    border: 4px solid var(--ink);
+    box-shadow: var(--shadow-lg);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+}
+
+.go-badge {
+    background: var(--coral);
+    color: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.gameover-card h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.go-player { font-weight: 600; }
+
+.new-record {
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-weight: 800;
+}
+
+.hidden { display: none !important; }
+
+.go-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.go-stat {
+    background: #f8fafc;
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.go-stat span {
+    font-size: 0.7rem;
+    font-weight: 800;
+    opacity: 0.75;
+}
+
+.go-stat strong {
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.go-stat-record {
+    background: var(--cyan);
+}
+
+.go-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 760px) {
+    .start-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-preview-card {
+        min-height: 195px;
+    }
+
+    .hud-pill {
+        min-width: 72px;
+        padding: 4px 8px;
+    }
+
+    .hud-pill strong {
+        font-size: 1rem;
+    }
+
+    .surface {
+        height: 44px;
+    }
+
+    .touch-invert-btn {
+        bottom: 58px;
+        padding: 10px 14px;
+    }
+}
+
+.ceiling-surface {
+    filter: brightness(0.65);
+}
+
+.floor-surface {
+    filter: brightness(0.65);
+}

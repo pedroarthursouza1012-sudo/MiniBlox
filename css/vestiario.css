@@ -1,0 +1,480 @@
+@keyframes piscar {
+    0%, 90%, 100% {
+        transform: scaleY(1);
+    }
+
+    93% {
+        transform: scaleY(0.1);
+    }
+
+    96% {
+        transform: scaleY(1);
+    }
+}
+
+
+.painel{
+    margin: 0 auto;
+    justify-content: center;
+    margin-top: 6rem;
+    gap: 10px;
+    border: 3px solid black;
+    width: fit-content;
+    padding: 3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 0 black;
+    background:rgb(104, 169, 255);
+}
+.personel{
+    display: flex;
+    gap: 35px;
+}
+
+.persoBox{
+
+    border: 3px solid ;
+    padding: 2rem;
+    box-shadow: 5px 5px 0 black;
+    background-color: #dbdbdb3b;
+    backdrop-filter: blur(5px);
+}
+
+.painel button{
+    width: 80%;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    margin-top: .5rem;
+    box-shadow: 0 6px 0 black;
+    border: 2px solid;
+    cursor: pointer;
+    transition: .2s ease;
+    background-color: rgb(255, 204, 38);
+    letter-spacing: 1px;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+}
+
+.painel button:hover{
+    transform: translateY(2px);
+    box-shadow: 0 4px 0 black;
+}
+.painel button:active{
+    transform: translateY(6px);
+    box-shadow: 0 0px 0 black;
+}
+
+.selectors *{
+
+margin-bottom: .4rem;
+}
+
+.selectors p{
+    padding: .2rem;
+    font-weight: 600;
+    letter-spacing: 1px;   
+}
+
+.selectors select{
+    padding: 3px;
+    font-family: "Space Grotesk", sans-serif;
+    border: 2px solid;
+    font-weight: 600;
+}
+
+/* CAMISAS DE TIME  */
+.personagem{
+
+--flamengo:repeating-linear-gradient(
+        180deg,
+        black 0px,
+        black 10px,
+        rgb(255, 47, 47) 10px,
+        rgb(247, 49, 49) 20px
+    );
+--palmeiras:repeating-linear-gradient(
+        90deg,
+        #24af59 0px,
+        #24af59 10px,
+        #f1f1f1 10px,
+        #f1f1f1 20px
+    );
+--corinthians: repeating-linear-gradient(
+        90deg,
+        black 0px,
+        black 10px,
+        white 10px,
+        white 20px
+    );
+--fluminense: repeating-linear-gradient(
+        90deg,
+        #7b1535 0px,
+        #7b1535 15px,
+        white 15px,
+        white 25px,
+        #006b45 25px,
+        #006b45 40px,
+        white 40px,
+        white 50px
+    );
+/* SÃO PAULO FC */
+    --sao-paulo: repeating-linear-gradient(
+        90deg,
+        #ffffff 0px,
+        #ffffff 10px,
+        #d71920 10px,
+        #d71920 20px,
+        #000000 20px,
+        #000000 30px
+    );
+
+    /* BAHIA FC */
+    --bahia: repeating-linear-gradient(
+        90deg,
+        #005ca9 0px,
+        #005ca9 10px,
+        #ffffff 10px,
+        #ffffff 20px,
+        #d71920 20px,
+        #d71920 30px
+    );
+
+    /* BOTAFOGO FC */
+    --botafogo: repeating-linear-gradient(
+        90deg,
+        #000000 0px,
+        #000000 10px,
+        #ffffff 10px,
+        #ffffff 20px
+    );
+
+    /* VASCO DA GAMA */
+    --vasco: repeating-linear-gradient(
+        90deg,
+        #000000 0px,
+        #000000 15px,
+        #ffffff 15px,
+        #ffffff 20px
+    );
+
+    /* GRÊMIO */
+    --gremio: repeating-linear-gradient(
+        90deg,
+        #0072bc 0px,
+        #0072bc 10px,
+        #000000 10px,
+        #000000 20px,
+        #ffffff 20px,
+        #ffffff 30px
+    );
+
+    /* SANTOS FC */
+    --santos: repeating-linear-gradient(
+    90deg,
+    #ffffff 0px,
+    #ffffff 15px,
+    #111111 15px,
+    #111111 20px
+);
+
+    /* MIRASSOL FC */
+    --mirassol: repeating-linear-gradient(
+        90deg,
+        #008b45 0px,
+        #008b45 10px,
+        #ffdf00 10px,
+        #ffdf00 20px
+    );
+
+    /* INTERNACIONAL */
+
+    --internacional: linear-gradient(
+        180deg,
+        #d71920 0%,
+        #d71920 75%,
+        #ffffff 75%,
+        #ffffff 80%,
+        #d71920 80%,
+        #d71920 100%
+    );
+
+}
+
+/* CAMISAS CASUAIS */
+.personagem{
+    --azul:rgb(94, 152, 190);
+    --vermelha:rgb(238, 59, 59);
+    --preta:rgb(35, 35, 37);
+    --branca:rgb(230, 230, 230);
+    --roxa:purple;
+    --amarela:rgb(255, 217, 0);
+    --verde:rgb(204, 238, 55);
+    --rosa:rgb(255, 82, 111);
+}
+
+/* CALÇAS */
+.personagem{
+    --calca: rgb(51, 31, 99);
+    --calca2:#d4b089;
+    --calca3:rgb(51, 48, 48);
+}
+
+/* PELES */
+.personagem{
+    --pele1: rgb(240, 177, 140);
+    --pele2: rgb(204, 110, 73);
+    --pele3:rgb(255, 157, 118);
+    --pele4:rgb(255, 203, 183);
+    --pele5:rgb(143, 78, 53);
+
+}
+
+/* CORES DE CABELO */
+.personagem{
+    --cabelo: rgb(139, 57, 57);
+    --cabelo2:rgb(255, 223, 45);
+    --cabelo3:rgb(255, 201, 101);
+    --cabelo4:rgb(37, 37, 37);
+    --cabelo5:rgb(191, 197, 202);
+}
+
+.personagem {
+    position: relative;
+    width: 120px;
+    height: 280px;
+    --pele: var(--pele1);
+    --cabelo: rgb(139, 57, 57);
+}
+
+/* CORPO */
+.corpo {
+    background: var(--camisa, var(--preta));
+    width: 80px;
+    height: 100px;
+    border-radius: 15px 15px 0 0;
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    z-index: 1;
+    border: 1px solid rgba(0, 0, 0, 0.363);
+    box-shadow: 0 0 5px,
+    inset 2px 2px 4px rgba(255, 255, 255, 0.13),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.315);
+}
+
+/* PELE-DO-PERSONAGEM */
+.cabeca,
+.braco-direito,
+.braco-esquerdo {
+    background: var(--pele);
+    box-shadow: 0 0 5px,
+    inset 2px 2px 4px rgba(255, 255, 255, 0.774),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.315);
+}
+
+/* CABEÇA */
+
+.cabeca {
+    height: 80px;
+    width: 80px;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 10;
+}
+
+/* CABELO MASCULINO */
+.cabelo {
+    height: 20px;
+    width: 80px;
+    position: absolute;
+    top: 0;
+    border-radius: 15px 15px 0 0;
+}
+.cabelo::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left:0px;
+    width: 80px;
+    height: 17px;
+    clip-path: polygon(
+        0 0, 100% 0,
+        100% 65%, 85% 100%,
+        70% 65%, 55% 100%,
+        40% 65%, 25% 100%,
+        10% 65%, 0 85%
+    );
+}
+/* COR USADA */
+.cabelo, .cabelo::after{
+    background: var(--cabelo);
+}
+
+
+/* CABELO FEMININO */
+.cabelo-feminino {
+    display: none;
+    position: absolute;
+    top: -4px;
+    left: -5px;
+    width: 90px;
+    height: 100px;
+    z-index: 3;
+}
+
+/* Volume superior */
+.cabelo-feminino::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 80px;
+    height: 30px;
+    border-radius: 40px 40px 8px 8px;
+}
+
+/* Franja curta */
+.cabelo-feminino::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 8px;
+    width: 74px;
+    height: 17px;
+    clip-path: polygon(
+        0 0, 100% 0,
+        100% 65%, 85% 100%,
+        70% 65%, 55% 100%,
+        40% 65%, 25% 100%,
+        10% 65%, 0 85%
+    );
+}
+
+/* Mechas laterais */
+.mecha-esquerda,
+.mecha-direita {
+    position: absolute;
+    top: 3px;
+    width: 14px;
+    height: 75px;
+    border-radius: 20px 20px 0px 10px;
+}
+
+.mecha-esquerda {
+    left: 0;
+}
+
+.mecha-direita {
+    right: 0;
+}
+/* COR CABELO FEMININO */
+.cabelo-feminino::after,
+.cabelo-feminino::before,
+.mecha-direita,
+.mecha-esquerda{
+    background: var(--cabelo);
+
+}
+
+
+/* OLHOS */
+
+.olho-esquerdo,
+.olho-direito {
+    background: rgb(0, 0, 0);
+    height: 25px;
+    width: 8px;
+    border-radius: 3px;
+    position: absolute;
+    top: 30px;
+    animation: piscar 4s infinite;
+    transform-origin: center;
+
+}
+
+.olho-esquerdo {
+    left: 20px;
+}
+
+.olho-direito {
+    right: 20px;
+}
+
+/* BRAÇOS */
+
+.braco-esquerdo,
+.braco-direito {
+    width: 20px;
+    height: 90px;
+    position: absolute;
+    top: 3px;
+}
+
+.braco-esquerdo {
+    left: -20px;
+    border-radius: 8px 4px 5px 5px;
+
+}
+
+.braco-direito {
+    right: -20px;
+    border-radius: 4px 8px 5px 5px;
+
+}
+
+/* PERNAS */
+
+.pernas {
+    position: absolute;
+    top: 180px;
+    left: 20px;
+    width: 80px;
+    height: 100px;
+    
+}
+
+.perna-esquerda,
+.perna-direita {
+    background: var(--calca);
+    width: 35px;
+    height: 100px;
+    position: absolute;
+    border-radius: 0 0 7px 7px;
+    box-shadow: 0 0 5px;
+    border: 1px solid;
+    box-shadow: 0 0 5px,
+    inset 2px 2px 4px rgba(255, 255, 255, 0.068),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.315);
+}
+
+.perna-esquerda {
+    left: 0;
+}
+
+.perna-direita {
+    right: 0;
+}
+
+/* Inicialmente masculino */
+.personagem.masculino .cabelo {
+    display: block;
+}
+
+.personagem.masculino .cabelo-feminino {
+    display: none;
+}
+
+/* Quando for feminino */
+.personagem.feminino .cabelo {
+    display: none;
+}
+
+.personagem.feminino .cabelo-feminino {
+    display: block;
+}

@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SINUCA 8-BALL — Edição Neobrutalista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <!-- ==================== MENU PRINCIPAL ==================== -->
+    <section id="screen-menu" class="screen screen-active" aria-label="Menu Principal">
+      <div class="menu-container nb-card">
+        <div class="menu-header">
+          <div class="brand-badge nb-badge nb-badge-yellow">2 JOGADORES LOCAIS • 8-BALL</div>
+          <h1 class="brand-title">
+            <span class="title-ball" aria-hidden="true">8</span>
+            SINUCA<br>8-BALL
+          </h1>
+          <p class="brand-subtitle">Física precisa, controle real de taco e regras oficiais para partidas locais.</p>
+        </div>
+
+        <div class="menu-layout">
+          <nav class="menu-actions" aria-label="Navegação Principal">
+            <button id="btn-menu-play" class="nb-btn nb-btn-primary nb-btn-lg" type="button">
+              <span class="btn-icon">▶</span> JOGAR
+            </button>
+            <button id="btn-menu-rules" class="nb-btn nb-btn-white" type="button">
+              <span class="btn-icon">📖</span> REGRAS
+            </button>
+            <button id="btn-menu-settings" class="nb-btn nb-btn-white" type="button">
+              <span class="btn-icon">⚙</span> CONFIGURAÇÕES
+            </button>
+            <button id="btn-menu-stats" class="nb-btn nb-btn-white" type="button">
+              <span class="btn-icon">📊</span> ESTATÍSTICAS
+            </button>
+            <button id="btn-menu-exit" class="nb-btn nb-btn-danger" type="button">
+              <span class="btn-icon">✕</span> SAIR
+            </button>
+          </nav>
+
+          <div class="menu-art nb-panel" aria-hidden="true">
+            <div class="deco-table">
+              <div class="deco-pocket deco-tl"></div>
+              <div class="deco-pocket deco-tr"></div>
+              <div class="deco-pocket deco-bl"></div>
+              <div class="deco-pocket deco-br"></div>
+              <div class="deco-pocket deco-tm"></div>
+              <div class="deco-pocket deco-bm"></div>
+
+              <div class="deco-cue">
+                <div class="deco-cue-tip"></div>
+                <div class="deco-cue-shaft"></div>
+                <div class="deco-cue-butt"></div>
+              </div>
+
+              <div class="deco-ball deco-ball-cue"></div>
+              <div class="deco-rack">
+                <div class="deco-ball deco-b1">1</div>
+                <div class="deco-ball deco-b9">9</div>
+                <div class="deco-ball deco-b2">2</div>
+                <div class="deco-ball deco-b8">8</div>
+                <div class="deco-ball deco-b3">3</div>
+                <div class="deco-ball deco-b10">10</div>
+              </div>
+            </div>
+            <div class="deco-caption">
+              <span>MESA OFICIAL 2:1</span>
+              <span>FÍSICA SUB-STEP 240Hz</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CADASTRO DOS JOGADORES ==================== -->
+    <section id="screen-setup" class="screen" aria-label="Configuração da Partida">
+      <div class="panel-container nb-card">
+        <div class="panel-header">
+          <button id="btn-setup-back" class="nb-btn nb-btn-sm nb-btn-white" type="button">← VOLTAR</button>
+          <h2>NOVA PARTIDA</h2>
+          <span class="nb-badge nb-badge-cyan">LOCAL 1v1</span>
+        </div>
+
+        <form id="setup-form" class="setup-form" novalidate>
+          <div class="players-setup-grid">
+            <div class="player-setup-box nb-panel player1-accent">
+              <div class="player-tag">JOGADOR 1</div>
+              <label for="input-p1-name">Nome do Jogador 1</label>
+              <input id="input-p1-name" class="nb-input" type="text" maxlength="18" placeholder="Ex: Lucas" autocomplete="off" required>
+              <div id="p1-suggestions" class="profile-chips"></div>
+              <p id="error-p1" class="field-error" aria-live="polite"></p>
+            </div>
+
+            <div class="vs-divider" aria-hidden="true">VS</div>
+
+            <div class="player-setup-box nb-panel player2-accent">
+              <div class="player-tag">JOGADOR 2</div>
+              <label for="input-p2-name">Nome do Jogador 2</label>
+              <input id="input-p2-name" class="nb-input" type="text" maxlength="18" placeholder="Ex: Marina" autocomplete="off" required>
+              <div id="p2-suggestions" class="profile-chips"></div>
+              <p id="error-p2" class="field-error" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="series-setup nb-panel">
+            <span class="setup-label">FORMATO DA SÉRIE</span>
+            <div class="series-options" role="radiogroup" aria-label="Formato da série">
+              <label class="series-option">
+                <input type="radio" name="series-best" value="1" checked>
+                <span class="nb-choice">Melhor de 1</span>
+              </label>
+              <label class="series-option">
+                <input type="radio" name="series-best" value="3">
+                <span class="nb-choice">Melhor de 3</span>
+              </label>
+              <label class="series-option">
+                <input type="radio" name="series-best" value="5">
+                <span class="nb-choice">Melhor de 5</span>
+              </label>
+            </div>
+            <p class="setup-hint">Na primeira partida quem abre é sorteado aleatoriamente; nas seguintes alterna entre os jogadores.</p>
+          </div>
+
+          <div class="setup-footer">
+            <button id="btn-start-match" class="nb-btn nb-btn-primary nb-btn-lg" type="submit">
+              🎱 INICIAR PARTIDA
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==================== TELA DA PARTIDA ==================== -->
+    <section id="screen-game" class="screen" aria-label="Partida de Sinuca">
+      <!-- HUD SUPERIOR -->
+      <header class="game-top-hud">
+        <div id="hud-p1" class="hud-player nb-card-sm">
+          <div class="hud-player-main">
+            <div class="hud-name-row">
+              <span class="turn-dot" aria-hidden="true"></span>
+              <span id="hud-p1-name" class="hud-name">Jogador 1</span>
+              <span id="hud-p1-turn-tag" class="turn-pill">SUA VEZ</span>
+            </div>
+            <div class="hud-group-row">
+              <span id="hud-p1-group" class="group-label">Mesa Aberta</span>
+              <div id="hud-p1-balls" class="hud-balls-list" aria-label="Bolas restantes do Jogador 1"></div>
+            </div>
+          </div>
+          <div class="hud-score-box" id="hud-p1-score">0</div>
+        </div>
+
+        <div class="hud-center-info nb-card-sm">
+          <div class="series-badge" id="hud-series-label">MELHOR DE 1</div>
+          <div class="table-state-label" id="hud-table-state">ABERTURA</div>
+          <div class="hud-quick-actions">
+            <button id="btn-game-rules" class="nb-btn nb-btn-xs nb-btn-white" type="button" title="Regras">?</button>
+            <button id="btn-game-settings" class="nb-btn nb-btn-xs nb-btn-white" type="button" title="Configurações">⚙</button>
+            <button id="btn-game-pause" class="nb-btn nb-btn-xs nb-btn-yellow" type="button" title="Pausar">❚❚</button>
+          </div>
+        </div>
+
+        <div id="hud-p2" class="hud-player hud-player-right nb-card-sm">
+          <div class="hud-score-box" id="hud-p2-score">0</div>
+          <div class="hud-player-main">
+            <div class="hud-name-row">
+              <span id="hud-p2-turn-tag" class="turn-pill">SUA VEZ</span>
+              <span id="hud-p2-name" class="hud-name">Jogador 2</span>
+              <span class="turn-dot" aria-hidden="true"></span>
+            </div>
+            <div class="hud-group-row">
+              <div id="hud-p2-balls" class="hud-balls-list" aria-label="Bolas restantes do Jogador 2"></div>
+              <span id="hud-p2-group" class="group-label">Mesa Aberta</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- MESA CANVAS -->
+      <main class="table-stage">
+        <div id="canvas-wrapper" class="canvas-wrapper">
+          <canvas id="pool-canvas" width="1200" height="680"></canvas>
+
+          <!-- BANNERS SOBRE A MESA -->
+          <div id="game-toast" class="game-toast" role="status" aria-live="polite"></div>
+          <div id="turn-banner" class="turn-banner" aria-live="polite">
+            <span id="turn-banner-title">VEZ DE JOGADOR 1</span>
+            <span id="turn-banner-sub">Mesa Aberta</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- HUD INFERIOR -->
+      <footer class="game-bottom-hud">
+        <div class="control-card nb-card-sm spin-card">
+          <div class="control-header">
+            <span>EFEITO NA BRANCA</span>
+            <button id="btn-reset-spin" class="nb-btn nb-btn-2xs nb-btn-white" type="button">Centro</button>
+          </div>
+          <div class="spin-body">
+            <div id="spin-pad" class="spin-pad" role="application" aria-label="Ponto de impacto na bola branca">
+              <div class="spin-cross-h"></div>
+              <div class="spin-cross-v"></div>
+              <div id="spin-marker" class="spin-marker"></div>
+            </div>
+            <div class="spin-presets">
+              <button class="spin-preset-btn" data-sx="0" data-sy="0.75" type="button" title="Acompanhamento">↑</button>
+              <button class="spin-preset-btn" data-sx="-0.75" data-sy="0" type="button" title="Efeito Esquerda">←</button>
+              <button class="spin-preset-btn" data-sx="0.75" data-sy="0" type="button" title="Efeito Direita">→</button>
+              <button class="spin-preset-btn" data-sx="0" data-sy="-0.75" type="button" title="Retorno">↓</button>
+            </div>
+            <span id="spin-label" class="spin-status">Centro</span>
+          </div>
+        </div>
+
+        <div class="control-card nb-card-sm power-card">
+          <div class="control-header">
+            <span>FORÇA DA TACADA</span>
+            <span id="power-percent" class="power-value">0%</span>
+          </div>
+          <div id="power-bar-track" class="power-bar-track" role="slider" aria-label="Barra de força da tacada" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="power-bar-fill" class="power-bar-fill"></div>
+            <span class="power-bar-hint" id="power-bar-hint">Arraste aqui ou recue na mesa para tacar</span>
+          </div>
+        </div>
+
+        <div class="control-card nb-card-sm hint-card">
+          <div class="control-header">
+            <span>CONTROLES</span>
+            <span id="shot-counter" class="shot-counter">Tacadas: 0</span>
+          </div>
+          <p id="controls-hint" class="controls-hint">
+            Mova o mouse para mirar • Segure e puxe para trás para carregar • Solte para tacar (Shift = mira fina).
+          </p>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ==================== MODAL: PAUSA ==================== -->
+    <div id="modal-pause" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+      <div class="modal-box nb-card">
+        <h2 id="pause-title">PARTIDA PAUSADA</h2>
+        <div class="modal-stack">
+          <button id="btn-pause-resume" class="nb-btn nb-btn-primary" type="button">▶ CONTINUAR</button>
+          <button id="btn-pause-restart" class="nb-btn nb-btn-white" type="button">↻ REINICIAR PARTIDA</button>
+          <button id="btn-pause-rules" class="nb-btn nb-btn-white" type="button">📖 REGRAS</button>
+          <button id="btn-pause-settings" class="nb-btn nb-btn-white" type="button">⚙ CONFIGURAÇÕES</button>
+          <button id="btn-pause-menu" class="nb-btn nb-btn-danger" type="button">✕ VOLTAR AO MENU</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: VITÓRIA ==================== -->
+    <div id="modal-victory" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="victory-title">
+      <div class="modal-box modal-box-wide nb-card victory-box">
+        <div class="victory-confetti" aria-hidden="true">🏆 🎱 ★</div>
+        <div id="victory-badge" class="nb-badge nb-badge-yellow">VITÓRIA NA PARTIDA</div>
+        <h2 id="victory-title" class="victory-winner">JOGADOR VENCEU!</h2>
+        <p id="victory-reason" class="victory-reason">Encaçapou a bola 8 legalmente.</p>
+
+        <div class="victory-stats-grid nb-panel">
+          <div class="vstat">
+            <span class="vstat-label">ADVERSÁRIO</span>
+            <strong id="vstat-loser">-</strong>
+          </div>
+          <div class="vstat">
+            <span class="vstat-label">TACADAS</span>
+            <strong id="vstat-shots">0</strong>
+          </div>
+          <div class="vstat">
+            <span class="vstat-label">DURAÇÃO</span>
+            <strong id="vstat-duration">00:00</strong>
+          </div>
+          <div class="vstat">
+            <span class="vstat-label">PLACAR DA SÉRIE</span>
+            <strong id="vstat-series">1 x 0</strong>
+          </div>
+        </div>
+
+        <div class="victory-actions">
+          <button id="btn-victory-next" class="nb-btn nb-btn-primary" type="button">PRÓXIMA PARTIDA →</button>
+          <button id="btn-victory-rematch" class="nb-btn nb-btn-yellow" type="button">JOGAR NOVAMENTE</button>
+          <button id="btn-victory-menu" class="nb-btn nb-btn-white" type="button">VOLTAR AO MENU</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: REGRAS ==================== -->
+    <div id="modal-rules" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="rules-title">
+      <div class="modal-box modal-box-wide nb-card">
+        <div class="modal-header">
+          <h2 id="rules-title">REGRAS DA SINUCA 8-BALL</h2>
+          <button id="btn-rules-close" class="nb-btn nb-btn-sm nb-btn-white" type="button">✕</button>
+        </div>
+        <div class="rules-content">
+          <div class="rule-block nb-panel">
+            <h3>1. Objetivo e Grupos</h3>
+            <p>São 15 bolas numeradas: <strong>Lisas (1 a 7)</strong>, <strong>Listradas (9 a 15)</strong> e a <strong>Bola 8 (preta)</strong>. Após limpar todas as bolas do seu grupo, encaçape legalmente a Bola 8 para vencer.</p>
+          </div>
+          <div class="rule-block nb-panel">
+            <h3>2. Abertura e Mesa Aberta</h3>
+            <p>Na abertura, posicione a branca na área de saída. A mesa começa <strong>Aberta</strong> mesmo que alguma bola caia na abertura. Os grupos só são definidos após a abertura, quando um jogador encaçapar legalmente uma bola lisa ou listrada.</p>
+          </div>
+          <div class="rule-block nb-panel">
+            <h3>3. Continuidade e Faltas</h3>
+            <p>Encaçapar uma bola válida do seu grupo mantém sua vez. Comete <strong>falta</strong> quem: encaçapar a bola branca, não acertar nenhuma bola, acertar primeiro uma bola que não seja do seu grupo (ou a Bola 8 antes da hora). Após falta, o adversário ganha <strong>Bola na Mão</strong>.</p>
+          </div>
+          <div class="rule-block nb-panel">
+            <h3>4. Bola 8</h3>
+            <p>Encaçapar a Bola 8 antes de limpar seu grupo, ou cometer falta na mesma tacada em que a Bola 8 cai, resulta em <strong>derrota imediata</strong>. Se a Bola 8 cair na abertura sem falta, ela é reposicionada no ponto de pé.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: CONFIGURAÇÕES ==================== -->
+    <div id="modal-settings" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+      <div class="modal-box nb-card">
+        <div class="modal-header">
+          <h2 id="settings-title">CONFIGURAÇÕES</h2>
+          <button id="btn-settings-close" class="nb-btn nb-btn-sm nb-btn-white" type="button">✕</button>
+        </div>
+
+        <div class="settings-list">
+          <div class="setting-item nb-panel">
+            <div class="setting-row">
+              <label for="setting-mute">Áudio do Jogo</label>
+              <button id="setting-mute" class="nb-btn nb-btn-sm nb-btn-yellow" type="button">SOM ATIVO</button>
+            </div>
+            <div class="setting-row">
+              <label for="setting-volume">Volume (<span id="setting-volume-val">70%</span>)</label>
+              <input id="setting-volume" type="range" min="0" max="100" value="70">
+            </div>
+          </div>
+
+          <div class="setting-item nb-panel">
+            <label for="setting-aim">Linha de Previsão de Mira</label>
+            <select id="setting-aim" class="nb-input">
+              <option value="full">Completa (trajetória + colisão)</option>
+              <option value="basic">Básica (apenas linha curta)</option>
+            </select>
+          </div>
+
+          <div class="setting-item nb-panel">
+            <label for="setting-felt">Cor do Pano da Mesa</label>
+            <select id="setting-felt" class="nb-input">
+              <option value="emerald">Verde Torneio</option>
+              <option value="cobalt">Azul Campeonato</option>
+              <option value="crimson">Bordô Clássico</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: ESTATÍSTICAS ==================== -->
+    <div id="modal-stats" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="stats-title">
+      <div class="modal-box modal-box-wide nb-card">
+        <div class="modal-header">
+          <h2 id="stats-title">ESTATÍSTICAS DOS JOGADORES</h2>
+          <button id="btn-stats-close" class="nb-btn nb-btn-sm nb-btn-white" type="button">✕</button>
+        </div>
+        <div id="stats-body" class="stats-body"></div>
+        <div class="stats-footer">
+          <button id="btn-stats-reset" class="nb-btn nb-btn-sm nb-btn-danger" type="button">🗑 REINICIAR ESTATÍSTICAS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: CONFIRMAÇÃO ==================== -->
+    <div id="modal-confirm" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <div class="modal-box nb-card">
+        <h2 id="confirm-title">CONFIRMAR AÇÃO</h2>
+        <p id="confirm-message" class="confirm-message">Tem certeza?</p>
+        <div class="confirm-actions">
+          <button id="btn-confirm-cancel" class="nb-btn nb-btn-white" type="button">CANCELAR</button>
+          <button id="btn-confirm-ok" class="nb-btn nb-btn-danger" type="button">CONFIRMAR</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: SAÍDA SEGURA ==================== -->
+    <div id="modal-exit" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="exit-title">
+      <div class="modal-box nb-card">
+        <div class="nb-badge nb-badge-yellow">ATÉ A PRÓXIMA</div>
+        <h2 id="exit-title">SESSÃO ENCERRADA</h2>
+        <p class="confirm-message">Suas estatísticas e configurações foram salvas localmente no navegador. Você já pode fechar esta aba com segurança ou voltar ao jogo.</p>
+        <button id="btn-exit-return" class="nb-btn nb-btn-primary" type="button">VOLTAR AO MENU PRINCIPAL</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

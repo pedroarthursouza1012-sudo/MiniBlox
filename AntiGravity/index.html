@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MiniBlox Run — Anti-Gravity Runner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <div id="app" class="app-shell">
+        <!-- Barra superior -->
+        <header class="top-bar">
+            <a href="../index.html" class="btn-neo btn-small btn-secondary">← MiniBlox</a>
+            <div class="top-bar-title">MINIBLOX RUN • ANTI-GRAVITY</div>
+            <button id="audioToggleBtn" class="btn-neo btn-small btn-cyan" type="button">🔊 Som: ON</button>
+        </header>
+
+        <!-- TELA INICIAL -->
+        <section id="startScreen" class="screen start-screen active">
+            <div class="start-card">
+                <div class="logo-row">
+                    <span class="badge-pill">ANTI-GRAVITY EDITION</span>
+                    <h1 class="game-logo">
+                        MINI BLOX <span class="logo-box">RUN</span>
+                    </h1>
+                </div>
+
+                <!-- Demonstração visual da mecânica -->
+                <div class="mechanic-demo">
+                    <div class="demo-track">
+                        <div class="demo-ceiling">TETO</div>
+                        <div class="demo-arrow">⇅ INVERTER GRAVIDADE</div>
+                        <div class="demo-floor">CHÃO</div>
+                    </div>
+                    <p>Alterne entre o <strong>chão</strong> e o <strong>teto</strong> no momento certo para desviar dos obstáculos!</p>
+                </div>
+
+                <div class="start-grid">
+                    <!-- Personagem em destaque -->
+                    <div class="hero-preview-card">
+                        <div id="menuCharacterMount" class="menu-char-mount"></div>
+                        <div class="player-badge">
+                            <span>CORREDOR</span>
+                            <strong id="menuPlayerName">JOGADOR</strong>
+                        </div>
+                    </div>
+
+                    <!-- Informações, Dificuldade e Controles -->
+                    <div class="menu-right">
+                        <div class="stats-row">
+                            <div class="stat-box stat-record">
+                                <span>🏆 RECORDE (<em id="menuDiffLabel">MÉDIO</em>)</span>
+                                <strong id="menuBestScore">0</strong>
+                            </div>
+                            <div class="stat-box stat-coins">
+                                <span>🪙 TOTAL DE MOEDAS</span>
+                                <strong id="menuTotalCoins">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="difficulty-box">
+                            <span class="section-label">SELECIONE A DIFICULDADE</span>
+                            <div class="difficulty-buttons" role="group" aria-label="Dificuldade">
+                                <button type="button" class="diff-btn" data-diff="facil">FÁCIL</button>
+                                <button type="button" class="diff-btn active" data-diff="medio">MÉDIO</button>
+                                <button type="button" class="diff-btn" data-diff="dificil">DIFÍCIL</button>
+                            </div>
+                        </div>
+
+                        <div class="controls-box">
+                            <span class="section-label">CONTROLES</span>
+                            <div class="controls-list">
+                                <span><kbd>Espaço</kbd> / <kbd>↑</kbd> / <kbd>W</kbd> — Inverter gravidade</span>
+                                <span><kbd>Clique</kbd> ou <kbd>Toque</kbd> — Inverter gravidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="playBtn" class="btn-neo btn-play" type="button">
+                    ▶ JOGAR AGORA
+                </button>
+            </div>
+        </section>
+
+        <!-- TELA DO JOGO -->
+        <section id="gameScreen" class="screen game-screen">
+            <!-- HUD -->
+            <div class="hud">
+                <div class="hud-pill hud-score">
+                    <span>PONTOS</span>
+                    <strong id="hudScore">0</strong>
+                </div>
+                <div class="hud-pill hud-coins">
+                    <span>🪙 MOEDAS</span>
+                    <strong id="hudCoins">0</strong>
+                </div>
+                <div class="hud-pill hud-best">
+                    <span>🏆 RECORDE</span>
+                    <strong id="hudBest">0</strong>
+                </div>
+                <div class="hud-pill hud-diff">
+                    <span>MODO</span>
+                    <strong id="hudDiff">MÉDIO</strong>
+                </div>
+            </div>
+
+            <!-- Pista Horizontal -->
+            <div id="arena" class="arena">
+                <!-- Céu + Paralaxe distante -->
+                <div class="sky-layer">
+                    <div class="sun"></div>
+                    <div id="cloudsLayer" class="parallax-layer"></div>
+                    <div id="skylineLayer" class="parallax-layer skyline-layer"></div>
+                    <div id="propsLayer" class="parallax-layer props-layer"></div>
+                </div>
+
+                <!-- Teto (superfície superior) -->
+                <div id="ceilingSurface" class="surface ceiling-surface">
+                    <div id="ceilingPattern" class="surface-pattern ceiling-pattern"></div>
+                </div>
+
+                <!-- Chão (superfície inferior) -->
+                <div id="floorSurface" class="surface floor-surface">
+                    <div id="floorPattern" class="surface-pattern floor-pattern"></div>
+                </div>
+
+                <!-- Entidades (Obstáculos, Moedas e Efeitos) -->
+                <div id="obstaclesLayer" class="entities-layer"></div>
+                <div id="coinsLayer" class="entities-layer"></div>
+                <div id="fxLayer" class="entities-layer"></div>
+
+                <!-- Jogador -->
+                <div id="playerWrap" class="player-wrap">
+                    <div id="gameCharacterMount" class="player-char-mount"></div>
+                </div>
+
+                <!-- Botão Touch / Ação rápida -->
+                <button id="invertActionBtn" class="touch-invert-btn" type="button" aria-label="Inverter gravidade">
+                    ⇅ INVERTER
+                </button>
+
+                <!-- Mensagem personalizada de início -->
+                <div id="startBanner" class="start-banner" aria-live="polite">
+                    <div id="startBannerText" class="start-banner-text">VAI, JOGADOR!</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA DE GAME OVER -->
+        <section id="gameOverScreen" class="screen gameover-screen">
+            <div class="gameover-card">
+                <span class="go-badge">COLISÃO!</span>
+                <h2>GAME OVER</h2>
+                <p class="go-player">Corredor: <strong id="goPlayerName">JOGADOR</strong></p>
+
+                <div id="newRecordBadge" class="new-record hidden">★ NOVO RECORDE! ★</div>
+
+                <div class="go-stats">
+                    <div class="go-stat">
+                        <span>PONTUAÇÃO FINAL</span>
+                        <strong id="goFinalScore">0</strong>
+                    </div>
+                    <div class="go-stat">
+                        <span>MOEDAS COLETADAS</span>
+                        <strong id="goCoins">0</strong>
+                    </div>
+                    <div class="go-stat">
+                        <span>DIFICULDADE</span>
+                        <strong id="goDiff">MÉDIO</strong>
+                    </div>
+                    <div class="go-stat go-stat-record">
+                        <span>RECORDE DO MODO</span>
+                        <strong id="goBestScore">0</strong>
+                    </div>
+                </div>
+
+                <div class="go-actions">
+                    <button id="restartBtn" class="btn-neo btn-play" type="button">↻ JOGAR NOVAMENTE</button>
+                    <button id="menuBtn" class="btn-neo btn-cyan" type="button">☰ VOLTAR AO MENU</button>
+                    <a href="../index.html" class="btn-neo btn-secondary">🎮 VOLTAR AO MINIBLOX</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>

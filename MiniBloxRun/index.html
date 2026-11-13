@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MiniBlox Run — Endless Runner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <div id="app" class="app-shell">
+        <!-- Barra superior fixa -->
+        <header class="top-bar">
+            <a href="../index.html" class="btn-neo btn-small btn-secondary" title="Voltar ao MiniBlox">
+                ← MiniBlox
+            </a>
+            <div class="top-bar-title">MINIBLOX RUN</div>
+            <button id="audioToggleBtn" class="btn-neo btn-small btn-accent" type="button" aria-label="Alternar áudio">
+                🔊 Som: ON
+            </button>
+        </header>
+
+        <!-- TELA INICIAL -->
+        <section id="startScreen" class="screen start-screen active">
+            <div class="start-card">
+                <div class="logo-badge">ARCADE EDITION</div>
+                <h1 class="game-logo">
+                    <span>MINIBLOX</span>
+                    <span class="logo-highlight">RUN!</span>
+                </h1>
+
+                <div class="start-hero">
+                    <div class="preview-box">
+                        <div id="menuCharacterMount" class="character-mount"></div>
+                        <div class="player-tag">
+                            <span class="player-tag-label">CORREDOR</span>
+                            <strong id="menuPlayerName">JOGADOR</strong>
+                        </div>
+                    </div>
+
+                    <div class="stats-panel">
+                        <div class="stat-card stat-record">
+                            <span class="stat-label">🏆 MELHOR PONTUAÇÃO</span>
+                            <strong id="menuBestScore" class="stat-value">0</strong>
+                        </div>
+                        <div class="stat-card stat-coins">
+                            <span class="stat-label">🪙 TOTAL DE MOEDAS</span>
+                            <strong id="menuTotalCoins" class="stat-value">0</strong>
+                        </div>
+
+                        <div class="controls-box">
+                            <h2>CONTROLES</h2>
+                            <div class="controls-grid">
+                                <div class="control-item">
+                                    <kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd>
+                                    <span>Trocar pista</span>
+                                </div>
+                                <div class="control-item">
+                                    <kbd>↑</kbd> <kbd>W</kbd> ou <kbd>Espaço</kbd>
+                                    <span>Pular</span>
+                                </div>
+                                <div class="control-item">
+                                    <kbd>↓</kbd> ou <kbd>S</kbd>
+                                    <span>Deslizar</span>
+                                </div>
+                                <div class="control-item">
+                                    <kbd>Touch</kbd>
+                                    <span>Deslize na tela ou botões</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="start-actions">
+                    <button id="playBtn" class="btn-neo btn-play" type="button">
+                        ▶ JOGAR AGORA
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA DO JOGO -->
+        <section id="gameScreen" class="screen game-screen">
+            <!-- HUD -->
+            <div class="hud">
+                <div class="hud-pill hud-score">
+                    <span>PONTOS</span>
+                    <strong id="hudScore">0</strong>
+                </div>
+                <div class="hud-pill hud-coins">
+                    <span>🪙 MOEDAS</span>
+                    <strong id="hudCoins">0</strong>
+                </div>
+                <div class="hud-pill hud-best">
+                    <span>🏆 RECORDE</span>
+                    <strong id="hudBest">0</strong>
+                </div>
+            </div>
+
+            <!-- Palco 2.5D / 3 Pistas -->
+            <div id="world" class="world">
+                <!-- Céu e nuvens -->
+                <div class="sky">
+                    <div class="sun"></div>
+                    <div id="cloudsLayer" class="clouds-layer"></div>
+                    <div class="skyline">
+                        <div class="skyline-block b1"></div>
+                        <div class="skyline-block b2"></div>
+                        <div class="skyline-block b3"></div>
+                        <div class="skyline-block b4"></div>
+                        <div class="skyline-block b5"></div>
+                        <div class="skyline-block b6"></div>
+                        <div class="skyline-block b7"></div>
+                    </div>
+                </div>
+
+                <!-- Chão, calçadas e pistas -->
+                <div class="ground">
+                    <div class="sidewalk sidewalk-left"></div>
+                    <div class="sidewalk sidewalk-right"></div>
+                    <div class="road">
+                        <div class="lane-divider divider-left"></div>
+                        <div class="lane-divider divider-right"></div>
+                        <div id="roadStripes" class="road-stripes"></div>
+                    </div>
+                </div>
+
+                <!-- Camadas dinâmicas -->
+                <div id="sceneryLayer" class="entity-layer scenery-layer"></div>
+                <div id="entitiesLayer" class="entity-layer entities-layer"></div>
+                <div id="fxLayer" class="entity-layer fx-layer"></div>
+
+                <!-- Jogador -->
+                <div id="playerContainer" class="player-container lane-1">
+                    <div class="player-shadow"></div>
+                    <div id="gameCharacterMount" class="player-rig"></div>
+                </div>
+            </div>
+
+            <!-- Controles Touch para Mobile/Tablet -->
+            <div class="touch-controls" aria-label="Controles na tela">
+                <div class="touch-group-left">
+                    <button id="touchLeft" class="btn-touch" type="button" aria-label="Pista esquerda">◀</button>
+                    <button id="touchRight" class="btn-touch" type="button" aria-label="Pista direita">▶</button>
+                </div>
+                <div class="touch-group-right">
+                    <button id="touchJump" class="btn-touch btn-touch-jump" type="button" aria-label="Pular">▲</button>
+                    <button id="touchSlide" class="btn-touch btn-touch-slide" type="button" aria-label="Deslizar">▼</button>
+                </div>
+            </div>
+
+            <!-- MENSAGEM PERSONALIZADA DE INÍCIO -->
+            <div id="startBanner" class="start-banner" aria-live="polite">
+                <div id="startBannerText" class="start-banner-text">VAI, JOGADOR!</div>
+            </div>
+        </section>
+
+        <!-- TELA DE GAME OVER -->
+        <section id="gameOverScreen" class="screen gameover-screen">
+            <div class="gameover-card">
+                <div class="gameover-header">
+                    <span class="gameover-tag">FIM DE CORRIDA</span>
+                    <h2>GAME OVER</h2>
+                    <p class="gameover-player">Corredor: <strong id="goPlayerName">JOGADOR</strong></p>
+                </div>
+
+                <div id="newRecordBadge" class="new-record-badge hidden">
+                    ★ NOVO RECORDE! ★
+                </div>
+
+                <div class="gameover-stats">
+                    <div class="go-stat">
+                        <span>PONTUAÇÃO FINAL</span>
+                        <strong id="goFinalScore">0</strong>
+                    </div>
+                    <div class="go-stat">
+                        <span>MOEDAS COLETADAS</span>
+                        <strong id="goCoins">0</strong>
+                    </div>
+                    <div class="go-stat go-stat-best">
+                        <span>RECORDE</span>
+                        <strong id="goBestScore">0</strong>
+                    </div>
+                </div>
+
+                <div class="gameover-actions">
+                    <button id="restartBtn" class="btn-neo btn-play" type="button">
+                        ↻ JOGAR NOVAMENTE
+                    </button>
+                    <button id="menuBtn" class="btn-neo btn-accent" type="button">
+                        ☰ VOLTAR AO MENU
+                    </button>
+                    <a href="../index.html" class="btn-neo btn-secondary">
+                        🎮 VOLTAR AO MINIBLOX
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>

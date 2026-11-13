@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniBlox</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <div class="cadastro">
+    <form>
+
+        <h2>Cadastrar-se 📄</h2>
+        <label for="text">Nome:</label>
+        <input type="text" placeholder="Digite seu nome" required maxlength="25" id="nome">
+        
+
+        <p>Escolha seu gênero:</p>
+
+        <div class="gen-opt">
+            <input type="radio" id="man" name="genero" value="man" required>
+            <label for="man">Homem</label>
+        </div>
+
+        <div class="gen-opt">
+            <input type="radio" id="woman" name="genero" value="woman">
+            <label for="woman">Mulher</label>
+        </div>
+
+        <div class="gen-opt">
+            <input type="radio" id="noBin" name="genero" value="noBin">
+            <label for="noBin">Prefiro não me identificar</label>
+        </div>
+
+
+        <button class="submit" id="submitBtn" >Enviar</button>
+    </form>
+    </div>
+<div class="screen">
+    
+    <header>
+        <h1>MINIBLOX 🎮</h1>
+        <div class="links">
+            <a href="vestiario.html">Vestiário 🎩</a>
+            <a href="loja.html">Loja 🛒</a>
+            <a href="conta.html">Conta 👤</a>
+        </div>
+    </header>
+
+
+
+    <main>
+        
+        <section class="painel">
+
+            <div class="games">
+                <div class="game">
+                    <img src="assets/MiniBloxRun.jpg" alt="miniblox" class="gameImg">    
+                    <a href="MiniBloxRun/index.html">JOGAR</a>
+                
+                </div>
+                <div class="game">
+                    <img src="assets/AntiGravity.jpg" alt="antigravity" class="gameImg">    
+                    <a href="AntiGravity/index.html">JOGAR</a>
+                
+                </div>
+                <div class="game">
+                    <img src="assets/8ball.jpg" alt="8ball" class="gameImg">
+                    <a href="SinucaBlox/index.html">JOGAR</a>
+                
+                </div>
+                <div class="game">4</div>
+            </div>
+            
+        </section>
+
+
+    </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
