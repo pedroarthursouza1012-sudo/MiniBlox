@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Rush — MiniBlox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="top-header">
+            <div class="header-brand">
+                <span class="brand-badge">MINIBLOX</span>
+                <h1>ZOMBIE RUSH 🧟</h1>
+            </div>
+
+            <div class="header-actions">
+                <div class="audio-controls" aria-label="Controles de áudio">
+                    <button type="button" class="nb-btn nb-btn-sm btn-audio" id="toggle-music-btn" aria-pressed="true">
+                        🎵 Música: ON
+                    </button>
+                    <button type="button" class="nb-btn nb-btn-sm btn-audio" id="toggle-sfx-btn" aria-pressed="true">
+                        🔊 Efeitos: ON
+                    </button>
+                    <div class="volume-dropdown-wrap">
+                        <button type="button" class="nb-btn nb-btn-sm btn-volume-menu" id="volume-popover-btn" aria-expanded="false" aria-controls="volume-popover" title="Volume">
+                            🎚️
+                        </button>
+                        <div class="volume-popover hidden" id="volume-popover">
+                            <div class="volume-row">
+                                <label for="music-volume-slider">Música <span id="music-volume-label">45%</span></label>
+                                <input type="range" id="music-volume-slider" min="0" max="100" value="45">
+                            </div>
+                            <div class="volume-row">
+                                <label for="sfx-volume-slider">Efeitos <span id="sfx-volume-label">75%</span></label>
+                                <input type="range" id="sfx-volume-slider" min="0" max="100" value="75">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="../index.html" class="nb-btn nb-btn-sm btn-back-miniblox">
+                    MiniBlox 🎮
+                </a>
+            </div>
+        </header>
+
+        <main class="main-stage">
+            <!-- TELA 1: MENU PRINCIPAL -->
+            <section class="screen active" id="screen-menu" aria-labelledby="menu-title">
+                <div class="nb-panel menu-panel">
+                    <div class="menu-grid">
+                        <div class="menu-info">
+                            <span class="pill-tag">SOBREVIVÊNCIA POR ONDAS</span>
+                            <h2 id="menu-title" class="game-logo">ZOMBIE RUSH</h2>
+                            <p class="menu-desc">
+                                Entre na arena com seu personagem do MiniBlox, enfrente hordas crescentes de zumbis com sua espada e evolua entre as waves!
+                            </p>
+
+                            <div class="record-highlight" id="menu-record-box">
+                                <span class="record-main" id="menu-record-waves">RECORDE: 0 WAVES</span>
+                                <span class="record-sub" id="menu-record-details">Nenhuma partida registrada ainda</span>
+                            </div>
+
+                            <div class="menu-buttons">
+                                <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-go-register">
+                                    JOGAR ⚔️
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-lg btn-howto" id="btn-open-howto">
+                                    COMO JOGAR 📖
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-lg btn-ranking" id="btn-open-ranking">
+                                    RANKING LOCAL 🏆
+                                </button>
+                                <a href="../index.html" class="nb-btn nb-btn-lg btn-return">
+                                    VOLTAR AO MINIBLOX 🎮
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-showcase">
+                            <div class="showcase-card">
+                                <div class="showcase-header">
+                                    <strong>SEU PERSONAGEM</strong>
+                                    <span class="vest-badge" id="menu-vestiario-status">Vestiário</span>
+                                </div>
+                                <div class="avatar-preview-stage" id="menu-avatar-stage"></div>
+                                <div class="controls-mini-card">
+                                    <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Mover</span>
+                                    <span><kbd>Clique Esq.</kbd> Espada</span>
+                                    <span><kbd>R</kbd> Ultimate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TELA 2: IDENTIFICAÇÃO DO JOGADOR -->
+            <section class="screen" id="screen-register" aria-labelledby="register-title">
+                <div class="nb-panel register-panel">
+                    <div class="panel-header-box">
+                        <h2 id="register-title">IDENTIFICAÇÃO DO SOBREVIVENTE 🧑‍🚀</h2>
+                        <p>Informe seu nome para registrar sua pontuação e entrar na arena.</p>
+                    </div>
+
+                    <form id="register-form" novalidate>
+                        <div class="register-grid">
+                            <div class="register-avatar-card">
+                                <span class="preview-label">PERSONAGEM CARREGADO</span>
+                                <div class="avatar-preview-stage" id="register-avatar-stage"></div>
+                                <span class="preview-name-tag" id="register-preview-name">Jogador</span>
+                            </div>
+
+                            <div class="register-form-card">
+                                <label for="player-name-input">Nome do Jogador</label>
+                                <input
+                                    type="text"
+                                    id="player-name-input"
+                                    placeholder="Digite seu nome"
+                                    maxlength="16"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <small class="field-hint">Entre 1 e 16 caracteres (espaços extras serão removidos).</small>
+
+                                <div class="form-error hidden" id="register-error" role="alert"></div>
+
+                                <div class="register-tips">
+                                    <strong>Equipamento Inicial:</strong>
+                                    <ul>
+                                        <li>❤️ 100 HP (máximo evoluível até 350 HP)</li>
+                                        <li>🗡️ Espada Comum (25 de dano inicial)</li>
+                                        <li>⚡ Ultimate carregada a cada 15 zumbis</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="register-actions">
+                            <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-register-back">
+                                ← VOLTAR
+                            </button>
+                            <button type="submit" class="nb-btn nb-btn-lg btn-play" id="btn-start-game">
+                                ENTRAR NA ARENA ⚔️
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- TELA 3: JOGO PRINCIPAL -->
+            <section class="screen" id="screen-game" aria-label="Arena do Zombie Rush">
+                <div class="game-wrapper">
+                    <!-- HUD SUPERIOR -->
+                    <div class="game-hud">
+                        <div class="hud-block hud-player-hp">
+                            <div class="hud-top-row">
+                                <strong id="hud-player-name">Jogador</strong>
+                                <span id="hud-hp-text">100 / 100 HP</span>
+                            </div>
+                            <div class="hp-bar-track" aria-label="Barra de vida">
+                                <div class="hp-bar-fill" id="hud-hp-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="hud-block hud-wave-box">
+                            <div class="hud-stat-pair">
+                                <span>WAVE</span>
+                                <strong id="hud-wave">1</strong>
+                            </div>
+                            <div class="hud-stat-pair">
+                                <span>RESTANTES</span>
+                                <strong id="hud-remaining">3</strong>
+                            </div>
+                            <div class="hud-stat-pair">
+                                <span>ABATES</span>
+                                <strong id="hud-kills">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="hud-block hud-econ-box">
+                            <div class="hud-coins-row">
+                                <span>💰 <strong id="hud-coins">0</strong></span>
+                                <span class="hud-record-pill" id="hud-record-badge">REC: 0 W</span>
+                            </div>
+                            <div class="ult-bar-wrap" id="hud-ult-wrap">
+                                <div class="ult-bar-top">
+                                    <span>⚡ ULTIMATE [R]</span>
+                                    <strong id="hud-ult-text">0 / 15</strong>
+                                </div>
+                                <div class="ult-bar-track">
+                                    <div class="ult-bar-fill" id="hud-ult-fill" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ARENA RESPONSIVA -->
+                    <div class="arena-viewport" id="arena-viewport">
+                        <div class="arena-world" id="arena-world">
+                            <div class="arena-ground-decor" aria-hidden="true"></div>
+                            <div class="entities-layer" id="entities-layer"></div>
+                            <canvas id="fx-canvas" width="960" height="580"></canvas>
+
+                            <div class="wave-toast hidden" id="wave-toast">WAVE 1</div>
+                        </div>
+
+                        <!-- OVERLAY: FASE DE UPGRADES -->
+                        <div class="arena-overlay hidden" id="overlay-upgrade">
+                            <div class="upgrade-modal">
+                                <div class="upgrade-header">
+                                    <div>
+                                        <span class="pill-win" id="upgrade-wave-badge">WAVE 1 CONCLUÍDA!</span>
+                                        <h3>LOJA DE MELHORIAS 🛠️</h3>
+                                    </div>
+                                    <div class="upgrade-timer-box">
+                                        <div class="timer-pill">⏱️ <strong id="upgrade-timer-text">5.0s</strong></div>
+                                        <div class="coins-pill">💰 <strong id="upgrade-coins-text">0</strong></div>
+                                    </div>
+                                </div>
+
+                                <div class="timer-progress-track">
+                                    <div class="timer-progress-fill" id="upgrade-timer-bar" style="width: 100%;"></div>
+                                </div>
+
+                                <div class="upgrades-grid">
+                                    <div class="upgrade-card">
+                                        <div class="upgrade-icon">⚔️</div>
+                                        <h4>AUMENTAR ATAQUE</h4>
+                                        <p id="up-atk-desc">Dano atual: 25 → 33 (+8 de dano na espada)</p>
+                                        <button type="button" class="nb-btn nb-btn-md btn-play upgrade-buy-btn" id="btn-buy-atk">
+                                            COMPRAR • 💰 50
+                                        </button>
+                                    </div>
+
+                                    <div class="upgrade-card">
+                                        <div class="upgrade-icon">❤️</div>
+                                        <h4>RECUPERAR VIDA</h4>
+                                        <p id="up-heal-desc">Recupera +40 HP (até o limite atual)</p>
+                                        <button type="button" class="nb-btn nb-btn-md btn-howto upgrade-buy-btn" id="btn-buy-heal">
+                                            COMPRAR • 💰 25
+                                        </button>
+                                    </div>
+
+                                    <div class="upgrade-card">
+                                        <div class="upgrade-icon">🛡️</div>
+                                        <h4>VIDA MÁXIMA</h4>
+                                        <p id="up-maxhp-desc">Máximo: 100 → 125 HP (+15 HP atual)</p>
+                                        <button type="button" class="nb-btn nb-btn-md btn-upgrade-blue upgrade-buy-btn" id="btn-buy-maxhp">
+                                            COMPRAR • 💰 75
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="upgrade-footer">
+                                    <span class="upgrade-feedback" id="upgrade-feedback">Escolha suas melhorias antes que o tempo acabe!</span>
+                                    <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-skip-upgrade">
+                                        SKIP (PRÓXIMA WAVE) →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERLAY: GAME OVER -->
+                        <div class="arena-overlay hidden" id="overlay-gameover">
+                            <div class="gameover-modal">
+                                <span class="pill-lose">FIM DE JOGO 💀</span>
+                                <h2>GAME OVER</h2>
+                                <p class="gameover-player" id="go-player-line">Sobrevivente: Jogador</p>
+                                <div class="new-record-badge hidden" id="go-new-record">🏆 NOVO RECORDE NO ZOMBIE RUSH!</div>
+
+                                <div class="gameover-stats-grid">
+                                    <div class="go-stat">
+                                        <span>Wave Alcançada</span>
+                                        <strong id="go-wave">1</strong>
+                                    </div>
+                                    <div class="go-stat">
+                                        <span>Zumbis Eliminados</span>
+                                        <strong id="go-kills">0</strong>
+                                    </div>
+                                    <div class="go-stat">
+                                        <span>Moedas Conquistadas</span>
+                                        <strong id="go-coins">0</strong>
+                                    </div>
+                                    <div class="go-stat">
+                                        <span>Recorde Atual</span>
+                                        <strong id="go-record">0 Waves</strong>
+                                    </div>
+                                </div>
+
+                                <div class="gameover-actions">
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-retry">
+                                        JOGAR NOVAMENTE 🔄
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-ranking" id="btn-go-ranking">
+                                        VER RANKING 🏆
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-secondary" id="btn-go-menu">
+                                        VOLTAR AO MENU 🏠
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TELA 4: RANKING PRÓPRIO DO ZOMBIE RUSH -->
+            <section class="screen" id="screen-ranking" aria-labelledby="ranking-title">
+                <div class="nb-panel ranking-panel">
+                    <div class="panel-header-box">
+                        <h2 id="ranking-title">RANKING — ZOMBIE RUSH 🏆</h2>
+                        <p>Melhores marcas salvas localmente (critério: maior wave, desempate por abates).</p>
+                    </div>
+
+                    <div class="ranking-table-wrap">
+                        <table class="ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Jogador</th>
+                                    <th>Wave</th>
+                                    <th>Zumbis</th>
+                                    <th>Pontuação</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ranking-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="ranking-actions">
+                        <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-ranking-back">
+                            ← VOLTAR AO MENU
+                        </button>
+                        <button type="button" class="nb-btn nb-btn-md btn-play" id="btn-ranking-play">
+                            JOGAR AGORA ⚔️
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL COMO JOGAR -->
+    <div class="modal-backdrop hidden" id="modal-howto" role="dialog" aria-modal="true" aria-labelledby="howto-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="howto-title">COMO JOGAR 📖</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-howto" aria-label="Fechar">✕</button>
+            </div>
+            <div class="howto-list">
+                <div class="howto-item">
+                    <span class="howto-num">1</span>
+                    <div>
+                        <strong>Movimentação</strong>
+                        <p>Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> para correr pela arena e desviar das hordas.</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">2</span>
+                    <div>
+                        <strong>Ataque de Espada</strong>
+                        <p>Use o <strong>Clique Esquerdo</strong> na direção do cursor para desferir um corte amplo.</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">3</span>
+                    <div>
+                        <strong>Ultimate [R]</strong>
+                        <p>A cada <strong>15 zumbis derrotados</strong>, pressione <kbd>R</kbd> para disparar uma onda de energia devastadora!</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">4</span>
+                    <div>
+                        <strong>Moedas e Upgrades</strong>
+                        <p>Cada zumbi vale <strong>+10 moedas</strong>. Entre as waves você tem <strong>5 segundos</strong> para comprar melhorias ou clicar em SKIP.</p>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-howto-ok">ENTENDI, VAMOS SOBREVIVER! ⚔️</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

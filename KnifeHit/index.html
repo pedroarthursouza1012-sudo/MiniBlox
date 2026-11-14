@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knife Hit — MiniBlox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="top-header">
+            <div class="header-brand">
+                <span class="brand-badge">MINIBLOX</span>
+                <h1>KNIFE HIT 🔪</h1>
+            </div>
+
+            <div class="header-actions">
+                <div class="audio-controls" aria-label="Controles de áudio">
+                    <button type="button" class="nb-btn nb-btn-sm btn-audio" id="toggle-music-btn" aria-pressed="true" title="Ativar ou desativar música">
+                        🎵 Música: ON
+                    </button>
+                    <button type="button" class="nb-btn nb-btn-sm btn-audio" id="toggle-sfx-btn" aria-pressed="true" title="Ativar ou desativar efeitos sonoros">
+                        🔊 Efeitos: ON
+                    </button>
+                    <div class="volume-dropdown-wrap">
+                        <button type="button" class="nb-btn nb-btn-sm btn-volume-menu" id="volume-popover-btn" aria-expanded="false" aria-controls="volume-popover" title="Ajustar volumes">
+                            🎚️
+                        </button>
+                        <div class="volume-popover hidden" id="volume-popover">
+                            <div class="volume-row">
+                                <label for="music-volume-slider">Música <span id="music-volume-label">50%</span></label>
+                                <input type="range" id="music-volume-slider" min="0" max="100" value="50">
+                            </div>
+                            <div class="volume-row">
+                                <label for="sfx-volume-slider">Efeitos <span id="sfx-volume-label">75%</span></label>
+                                <input type="range" id="sfx-volume-slider" min="0" max="100" value="75">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="../index.html" class="nb-btn nb-btn-sm btn-back-miniblox" id="header-back-miniblox">
+                    MiniBlox 🎮
+                </a>
+            </div>
+        </header>
+
+        <main class="main-stage">
+            <!-- TELA 1: MENU PRINCIPAL -->
+            <section class="screen active" id="screen-menu" aria-labelledby="menu-title">
+                <div class="nb-panel menu-panel">
+                    <div class="menu-hero">
+                        <div class="menu-text">
+                            <span class="pill-tag">MULTIPLAYER LOCAL • 2 JOGADORES</span>
+                            <h2 id="menu-title" class="game-logo">KNIFE HIT</h2>
+                            <p class="menu-subtitle">
+                                Lance facas no tronco giratório sem acertar as lâminas presas. Quem avançar mais fases vence!
+                            </p>
+
+                            <div class="miniblox-profile-box" id="miniblox-profile-box">
+                                <div class="mini-avatar" id="mini-avatar" aria-hidden="true">
+                                    <div class="mini-head">
+                                        <div class="mini-hair"></div>
+                                        <div class="mini-eyes"></div>
+                                    </div>
+                                    <div class="mini-torso"></div>
+                                </div>
+                                <div class="profile-meta">
+                                    <strong id="miniblox-status-title">Perfil MiniBlox</strong>
+                                    <span id="miniblox-status-desc">Verificando conta...</span>
+                                </div>
+                            </div>
+
+                            <div class="menu-buttons">
+                                <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-go-setup">
+                                    JOGAR ⚔️
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-lg btn-howto" id="btn-open-howto">
+                                    COMO JOGAR 📖
+                                </button>
+                                <a href="../index.html" class="nb-btn nb-btn-lg btn-return">
+                                    VOLTAR AO MINIBLOX 🎮
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-art">
+                            <div class="art-card">
+                                <svg class="log-illustration" viewBox="0 0 280 280" role="img" aria-label="Ilustração cartoon de um tronco de madeira com facas presas">
+                                    <defs>
+                                        <linearGradient id="bladeGrad" x1="0" y1="0" x2="1" y2="0">
+                                            <stop offset="0%" stop-color="#f8fbff"/>
+                                            <stop offset="55%" stop-color="#cfd9e6"/>
+                                            <stop offset="100%" stop-color="#8b9ab0"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Sombra decorativa -->
+                                    <circle cx="146" cy="146" r="64" fill="#000000" opacity="0.18"/>
+                                    <!-- Grupo giratório -->
+                                    <g class="svg-spin-group">
+                                        <!-- Faca 1 (Topo) -->
+                                        <g transform="translate(140, 140) rotate(-20)">
+                                            <rect x="-7" y="-128" width="14" height="36" rx="4" fill="#ff7070" stroke="#000" stroke-width="3.5"/>
+                                            <rect x="-12" y="-95" width="24" height="8" rx="3" fill="#ffcf40" stroke="#000" stroke-width="3.5"/>
+                                            <polygon points="-6,-87 6,-87 4,-56 -4,-56" fill="url(#bladeGrad)" stroke="#000" stroke-width="3"/>
+                                        </g>
+                                        <!-- Faca 2 (Direita) -->
+                                        <g transform="translate(140, 140) rotate(72)">
+                                            <rect x="-7" y="-128" width="14" height="36" rx="4" fill="#54adff" stroke="#000" stroke-width="3.5"/>
+                                            <rect x="-12" y="-95" width="24" height="8" rx="3" fill="#ffcf40" stroke="#000" stroke-width="3.5"/>
+                                            <polygon points="-6,-87 6,-87 4,-56 -4,-56" fill="url(#bladeGrad)" stroke="#000" stroke-width="3"/>
+                                        </g>
+                                        <!-- Faca 3 (Inferior esquerda) -->
+                                        <g transform="translate(140, 140) rotate(195)">
+                                            <rect x="-7" y="-128" width="14" height="36" rx="4" fill="#c054ff" stroke="#000" stroke-width="3.5"/>
+                                            <rect x="-12" y="-95" width="24" height="8" rx="3" fill="#ffcf40" stroke="#000" stroke-width="3.5"/>
+                                            <polygon points="-6,-87 6,-87 4,-56 -4,-56" fill="url(#bladeGrad)" stroke="#000" stroke-width="3"/>
+                                        </g>
+                                        <!-- Faca 4 (Esquerda) -->
+                                        <g transform="translate(140, 140) rotate(285)">
+                                            <rect x="-7" y="-128" width="14" height="36" rx="4" fill="#bbff62" stroke="#000" stroke-width="3.5"/>
+                                            <rect x="-12" y="-95" width="24" height="8" rx="3" fill="#ffcf40" stroke="#000" stroke-width="3.5"/>
+                                            <polygon points="-6,-87 6,-87 4,-56 -4,-56" fill="url(#bladeGrad)" stroke="#000" stroke-width="3"/>
+                                        </g>
+                                        <!-- Tronco -->
+                                        <circle cx="140" cy="140" r="64" fill="#7c4621" stroke="#000" stroke-width="5"/>
+                                        <circle cx="140" cy="140" r="53" fill="#df9f60" stroke="#5b3114" stroke-width="3"/>
+                                        <circle cx="140" cy="140" r="40" fill="none" stroke="#c37f41" stroke-width="3" stroke-dasharray="28 12"/>
+                                        <circle cx="140" cy="140" r="24" fill="none" stroke="#c37f41" stroke-width="3" stroke-dasharray="16 8"/>
+                                        <circle cx="140" cy="140" r="8" fill="#b46f33"/>
+                                        <path d="M 102 115 A 45 45 0 0 1 162 96" fill="none" stroke="#f6caa0" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+                                    </g>
+                                </svg>
+                                <div class="records-strip" id="menu-records-strip">
+                                    <span>🏆 Melhor Fase: <strong id="record-best-stage">—</strong></span>
+                                    <span>⭐ Recorde: <strong id="record-best-score">0 pts</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TELA 2: CADASTRO DOS JOGADORES -->
+            <section class="screen" id="screen-setup" aria-labelledby="setup-title">
+                <div class="nb-panel setup-panel">
+                    <div class="panel-title-box">
+                        <h2 id="setup-title">CONFIGURAR PARTIDA 👥</h2>
+                        <p>Informe os nomes dos dois competidores para iniciar o duelo.</p>
+                    </div>
+
+                    <form id="setup-form" novalidate>
+                        <div class="players-setup-grid">
+                            <div class="player-setup-card p1-theme">
+                                <div class="player-badge-row">
+                                    <span class="player-chip p1-chip">JOGADOR 1</span>
+                                    <span class="player-color-tag">Equipe Azul</span>
+                                </div>
+                                <label for="player1-name">Nome do Jogador 1</label>
+                                <input
+                                    type="text"
+                                    id="player1-name"
+                                    name="player1"
+                                    placeholder="Ex: Lucas"
+                                    maxlength="16"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <small class="input-hint">Máximo de 16 caracteres</small>
+                            </div>
+
+                            <div class="vs-divider" aria-hidden="true">VS</div>
+
+                            <div class="player-setup-card p2-theme">
+                                <div class="player-badge-row">
+                                    <span class="player-chip p2-chip">JOGADOR 2</span>
+                                    <span class="player-color-tag">Equipe Coral</span>
+                                </div>
+                                <label for="player2-name">Nome do Jogador 2</label>
+                                <input
+                                    type="text"
+                                    id="player2-name"
+                                    name="player2"
+                                    placeholder="Ex: Marina"
+                                    maxlength="16"
+                                    autocomplete="off"
+                                    required
+                                >
+                                <small class="input-hint">Deve ser diferente do Jogador 1</small>
+                            </div>
+                        </div>
+
+                        <div class="setup-error hidden" id="setup-error" role="alert"></div>
+
+                        <div class="setup-actions">
+                            <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-setup-back">
+                                ← VOLTAR
+                            </button>
+                            <button type="submit" class="nb-btn nb-btn-lg btn-play" id="btn-start-match">
+                                INICIAR PARTIDA 🔪
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- TELA 3: JOGO PRINCIPAL -->
+            <section class="screen" id="screen-game" aria-label="Área do jogo Knife Hit">
+                <div class="game-layout">
+                    <!-- Barra superior de status dos jogadores -->
+                    <div class="match-hud">
+                        <div class="hud-player-card p1-hud" id="hud-p1-card">
+                            <div class="hud-player-top">
+                                <span class="hud-dot p1-dot"></span>
+                                <strong id="hud-p1-name">Jogador 1</strong>
+                                <span class="hud-state-tag" id="hud-p1-tag">VEZ</span>
+                            </div>
+                            <div class="hud-player-stats">
+                                <span>Fase: <strong id="hud-p1-stage">1</strong></span>
+                                <span>Pts: <strong id="hud-p1-score">0</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="hud-center-card">
+                            <div class="hud-stage-badge">FASE <span id="hud-current-stage">1</span></div>
+                            <div class="hud-turn-banner" id="hud-turn-indicator">Vez de Jogador 1</div>
+                            <div class="hud-knives-row">
+                                <div class="knives-icons" id="knives-icons" aria-hidden="true"></div>
+                                <span class="knives-counter">Restam: <strong id="hud-knives-left">5</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="hud-player-card p2-hud" id="hud-p2-card">
+                            <div class="hud-player-top">
+                                <span class="hud-dot p2-dot"></span>
+                                <strong id="hud-p2-name">Jogador 2</strong>
+                                <span class="hud-state-tag" id="hud-p2-tag">AGUARDA</span>
+                            </div>
+                            <div class="hud-player-stats">
+                                <span>Fase: <strong id="hud-p2-stage">1</strong></span>
+                                <span>Pts: <strong id="hud-p2-score">0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Área principal do Canvas -->
+                    <div class="playfield-card" id="playfield-card">
+                        <canvas id="game-canvas"></canvas>
+
+                        <div class="controls-hint" id="controls-hint">
+                            Clique na tela ou pressione <kbd>ESPAÇO</kbd> para lançar
+                        </div>
+
+                        <!-- Overlay: Transição de Turno -->
+                        <div class="game-overlay hidden" id="overlay-turn">
+                            <div class="overlay-card turn-card" id="turn-overlay-card">
+                                <span class="overlay-pill" id="turn-overlay-pill">TURNO DO JOGADOR</span>
+                                <h3 id="turn-overlay-player">Jogador 1</h3>
+                                <p id="turn-overlay-info">Prepare-se para a Fase 1!</p>
+                                <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-begin-turn">
+                                    COMEÇAR TURNO 🔪
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Overlay: Fase Concluída -->
+                        <div class="game-overlay hidden" id="overlay-stage-clear">
+                            <div class="overlay-card victory-card">
+                                <span class="overlay-pill pill-win">FASE CONCLUÍDA! 🎉</span>
+                                <h3 id="clear-overlay-title">Fase 1 Completa!</h3>
+                                <p id="clear-overlay-desc">+200 pontos de bônus!</p>
+                                <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-stage-continue">
+                                    CONTINUAR →
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Overlay: Derrota no Turno -->
+                        <div class="game-overlay hidden" id="overlay-turn-lost">
+                            <div class="overlay-card defeat-card">
+                                <span class="overlay-pill pill-lose">COLISÃO! 💥</span>
+                                <h3 id="lost-overlay-title">Turno encerrado!</h3>
+                                <p id="lost-overlay-desc">Você acertou uma faca presa no tronco.</p>
+                                <button type="button" class="nb-btn nb-btn-lg btn-secondary" id="btn-lost-continue">
+                                    PRÓXIMO TURNO →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TELA 4: RESULTADO FINAL -->
+            <section class="screen" id="screen-results" aria-labelledby="results-title">
+                <div class="nb-panel results-panel">
+                    <div class="winner-banner" id="winner-banner">
+                        <span class="winner-crown" id="winner-crown">🏆</span>
+                        <h2 id="results-title">FIM DE JOGO!</h2>
+                        <p id="results-subtitle">Vencedor: Jogador 1</p>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-player-card p1-theme" id="result-p1-card">
+                            <div class="result-header">
+                                <span class="player-chip p1-chip">JOGADOR 1</span>
+                                <span class="winner-tag hidden" id="result-p1-winner">VENCEDOR 👑</span>
+                            </div>
+                            <h3 id="result-p1-name">Jogador 1</h3>
+                            <ul class="result-stats-list">
+                                <li><span>Pontuação</span><strong id="result-p1-score">0</strong></li>
+                                <li><span>Fase alcançada</span><strong id="result-p1-stage">Fase 1</strong></li>
+                                <li><span>Fases concluídas</span><strong id="result-p1-cleared">0</strong></li>
+                                <li><span>Facas acertadas</span><strong id="result-p1-hits">0</strong></li>
+                            </ul>
+                        </div>
+
+                        <div class="result-player-card p2-theme" id="result-p2-card">
+                            <div class="result-header">
+                                <span class="player-chip p2-chip">JOGADOR 2</span>
+                                <span class="winner-tag hidden" id="result-p2-winner">VENCEDOR 👑</span>
+                            </div>
+                            <h3 id="result-p2-name">Jogador 2</h3>
+                            <ul class="result-stats-list">
+                                <li><span>Pontuação</span><strong id="result-p2-score">0</strong></li>
+                                <li><span>Fase alcançada</span><strong id="result-p2-stage">Fase 1</strong></li>
+                                <li><span>Fases concluídas</span><strong id="result-p2-cleared">0</strong></li>
+                                <li><span>Facas acertadas</span><strong id="result-p2-hits">0</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="results-actions">
+                        <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-play-again">
+                            JOGAR NOVAMENTE 🔄
+                        </button>
+                        <button type="button" class="nb-btn nb-btn-lg btn-howto" id="btn-results-menu">
+                            MENU PRINCIPAL 🏠
+                        </button>
+                        <a href="../index.html" class="nb-btn nb-btn-lg btn-return">
+                            VOLTAR AO MINIBLOX 🎮
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL COMO JOGAR -->
+    <div class="modal-backdrop hidden" id="modal-howto" role="dialog" aria-modal="true" aria-labelledby="howto-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="howto-title">COMO JOGAR 📖</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-howto" aria-label="Fechar instruções">✕</button>
+            </div>
+            <div class="howto-list">
+                <div class="howto-item">
+                    <span class="howto-num">1</span>
+                    <div>
+                        <strong>Lance as facas</strong>
+                        <p>Clique na área do jogo ou pressione <kbd>ESPAÇO</kbd> para arremessar a faca no tronco.</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">2</span>
+                    <div>
+                        <strong>Evite colisões</strong>
+                        <p>Não acerte nenhuma faca que já esteja cravada no tronco. Se bater em outra lâmina, você perde a vez!</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">3</span>
+                    <div>
+                        <strong>Turnos alternados</strong>
+                        <p>Os dois jogadores jogam alternadamente fase a fase. Quem for eliminado sai da disputa enquanto o outro continua avançando.</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">4</span>
+                    <div>
+                        <strong>Critério de vitória</strong>
+                        <p>Quando ambos perderem, vence quem tiver alcançado a maior fase. Em caso de empate, vence quem tiver mais pontos!</p>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-howto-ok">ENTENDI, VAMOS JOGAR! 🔪</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

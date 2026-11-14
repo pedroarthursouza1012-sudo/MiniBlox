@@ -11,10 +11,15 @@ html, body {
 
 body {
     min-height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background: url(../assets/1134126.png);
+    background-color: #f5f0e8;
+
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.35) 2px, transparent 2px),
+        url("../assets/1134126.png");
+    background-size: 26px 26px, cover;
+    background-position: 0 0, center;
+    background-repeat: repeat, no-repeat;
+
     font-family: "Space Grotesk", sans-serif;
 }
 
@@ -23,7 +28,7 @@ body {
 header {
     padding: 1rem;
     border: 3px solid;
-    border-radius: 0;
+    border-radius: 15px;
     box-shadow: 9px 9px 0 black;
     display: flex;
     width: fit-content;
@@ -53,8 +58,8 @@ header h1 {
     box-shadow: 0 5px 0 black;
     transition: .2s ease;
     font-weight: bold;
-    color: white;
-    text-shadow: 0 1px 3px black;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
 }
 
 .links a:hover {
