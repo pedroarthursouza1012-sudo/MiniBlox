@@ -19,6 +19,7 @@
     margin-top: 6rem;
     gap: 10px;
     border: 3px solid black;
+    border-radius: 15px;
     width: fit-content;
     padding: 3rem;
     align-items: center;
@@ -37,6 +38,7 @@
     border: 3px solid ;
     padding: 2rem;
     box-shadow: 5px 5px 0 black;
+    border-radius: 15px;
     background-color: #dbdbdb3b;
     backdrop-filter: blur(5px);
 }
@@ -54,6 +56,7 @@
     cursor: pointer;
     transition: .2s ease;
     background-color: rgb(255, 204, 38);
+    border-radius: 10px;
     letter-spacing: 1px;
     font-family: "Space Grotesk", sans-serif;
     font-weight: 600;
@@ -71,6 +74,17 @@
 .selectors *{
 
 margin-bottom: .4rem;
+border-radius: 8px;
+}
+
+select{
+    transition: .2s ease;
+}
+
+select:focus{
+    transform: translateX(-3px);
+    outline-color: none;
+    box-shadow: 4px 4px 0;
 }
 
 .selectors p{

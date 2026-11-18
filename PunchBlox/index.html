@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUNCHBLOX — Luta 2D Multiplayer | MiniBlox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <!-- HEADER SUPERIOR -->
+        <header class="top-header" id="top-header">
+            <div class="brand-wrap">
+                <span class="miniblox-tag">MINIBLOX</span>
+                <h1>PUNCHBLOX 🥊</h1>
+            </div>
+            <div class="header-right">
+                <button type="button" class="nb-btn nb-btn-sm btn-audio" id="quick-music-btn">🎵 Música: ON</button>
+                <button type="button" class="nb-btn nb-btn-sm btn-audio" id="quick-sfx-btn">🔊 Efeitos: ON</button>
+                <a href="../index.html" class="nb-btn nb-btn-sm btn-return">MiniBlox 🎮</a>
+            </div>
+        </header>
+
+        <main class="main-stage">
+            <!-- ===============================================================
+                 TELA 1: MENU PRINCIPAL
+            ================================================================ -->
+            <section class="screen active" id="screen-menu" aria-labelledby="menu-logo">
+                <div class="nb-panel menu-panel">
+                    <div class="menu-composition">
+                        <!-- Lutador Esquerdo (Energia Vermelha) -->
+                        <div class="menu-fighter-side side-red">
+                            <canvas id="menu-p1-canvas" width="210" height="260" aria-hidden="true"></canvas>
+                            <span class="energy-label label-red">J1 • FÚRIA VERMELHA</span>
+                        </div>
+
+                        <!-- Centro: Logo + Botões -->
+                        <div class="menu-center-col">
+                            <span class="arcade-pill">ARCADE 2D • MULTIPLAYER LOCAL</span>
+                            <h2 id="menu-logo" class="punchblox-logo">PUNCHBLOX</h2>
+                            <p class="menu-sub">12 Lutadores Únicos • 5 Arenas • Especiais Cinematográficos</p>
+
+                            <div class="menu-buttons">
+                                <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-menu-play">
+                                    JOGAR (2P) ⚔️
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-lg btn-train" id="btn-menu-training">
+                                    TREINAMENTO 🥋
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-md btn-chars" id="btn-menu-chars">
+                                    PERSONAGENS (12) 👥
+                                </button>
+                                <div class="menu-btn-row">
+                                    <button type="button" class="nb-btn nb-btn-md btn-howto" id="btn-menu-howto">
+                                        COMO JOGAR 📖
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-settings" id="btn-menu-settings">
+                                        CONFIGURAÇÕES ⚙️
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lutador Direito (Energia Azul) -->
+                        <div class="menu-fighter-side side-blue">
+                            <canvas id="menu-p2-canvas" width="210" height="260" aria-hidden="true"></canvas>
+                            <span class="energy-label label-blue">J2 • RAIO AZUL</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 2: GALERIA DOS 12 PERSONAGENS
+            ================================================================ -->
+            <section class="screen" id="screen-roster" aria-labelledby="roster-title">
+                <div class="nb-panel roster-panel">
+                    <div class="panel-top-row">
+                        <div>
+                            <h2 id="roster-title">OS 12 LUTADORES DO PUNCHBLOX 👥</h2>
+                            <p>6 homens e 6 mulheres, cada um com arma, estilo de combate e golpe especial exclusivo.</p>
+                        </div>
+                        <button type="button" class="nb-btn nb-btn-sm btn-secondary" id="btn-roster-back">← VOLTAR</button>
+                    </div>
+                    <div class="roster-grid" id="roster-gallery-grid"></div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 3: CADASTRO DOS DOIS JOGADORES
+            ================================================================ -->
+            <section class="screen" id="screen-names" aria-labelledby="names-title">
+                <div class="nb-panel names-panel">
+                    <div class="panel-top-row">
+                        <div>
+                            <h2 id="names-title">IDENTIFICAÇÃO DOS DESAFIANTES 🥊</h2>
+                            <p>Informe os nomes dos dois jogadores para o combate local no mesmo teclado.</p>
+                        </div>
+                        <button type="button" class="nb-btn nb-btn-sm btn-secondary" id="btn-names-back">← MENU</button>
+                    </div>
+
+                    <form id="names-form" novalidate>
+                        <div class="names-grid">
+                            <div class="name-card p1-name-card">
+                                <span class="player-tag tag-red">JOGADOR 1 (WASD + J/K/L/R)</span>
+                                <label for="p1-name-input">Nome do Jogador 1</label>
+                                <input type="text" id="p1-name-input" placeholder="Ex: Rafael" maxlength="14" autocomplete="off" required>
+                                <small>Máximo de 14 caracteres</small>
+                            </div>
+
+                            <div class="vs-badge-circle">VS</div>
+
+                            <div class="name-card p2-name-card">
+                                <span class="player-tag tag-blue">JOGADOR 2 (SETAS + NUMPAD 1/2/3/5)</span>
+                                <label for="p2-name-input">Nome do Jogador 2</label>
+                                <input type="text" id="p2-name-input" placeholder="Ex: Camila" maxlength="14" autocomplete="off" required>
+                                <small>Máximo de 14 caracteres</small>
+                            </div>
+                        </div>
+
+                        <div class="form-error hidden" id="names-error" role="alert"></div>
+
+                        <div class="names-actions">
+                            <button type="submit" class="nb-btn nb-btn-lg btn-play">ESCOLHER LUTADORES →</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 4: SELEÇÃO DE PERSONAGENS E ARENA (2P OU TREINAMENTO)
+            ================================================================ -->
+            <section class="screen" id="screen-select" aria-labelledby="select-title">
+                <div class="nb-panel select-panel">
+                    <div class="panel-top-row">
+                        <div>
+                            <h2 id="select-title">SELEÇÃO DE LUTADORES & ARENA ⚔️</h2>
+                            <p id="select-subtitle">Cada jogador escolhe um lutador diferente e definem a arena do duelo.</p>
+                        </div>
+                        <button type="button" class="nb-btn nb-btn-sm btn-secondary" id="btn-select-back">← VOLTAR</button>
+                    </div>
+
+                    <!-- Painel dos dois escolhidos + seletor de quem está escolhendo -->
+                    <div class="selected-slots-row">
+                        <div class="slot-box slot-p1 is-choosing" id="slot-p1-box">
+                            <div class="slot-head">
+                                <span class="player-tag tag-red" id="slot-p1-player-name">JOGADOR 1</span>
+                                <button type="button" class="nb-btn nb-btn-xs btn-pick-slot" id="btn-focus-p1">Escolher J1</button>
+                            </div>
+                            <div class="slot-content">
+                                <canvas id="slot-p1-canvas" width="90" height="105"></canvas>
+                                <div class="slot-meta">
+                                    <strong id="slot-p1-char">Selecione abaixo</strong>
+                                    <small id="slot-p1-spec">—</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slot-center-arena">
+                            <span class="arena-label">ARENA</span>
+                            <select id="arena-select" aria-label="Selecionar arena"></select>
+                            <span class="turn-hint" id="turn-select-hint">Vez de: JOGADOR 1</span>
+                        </div>
+
+                        <div class="slot-box slot-p2" id="slot-p2-box">
+                            <div class="slot-head">
+                                <span class="player-tag tag-blue" id="slot-p2-player-name">JOGADOR 2</span>
+                                <button type="button" class="nb-btn nb-btn-xs btn-pick-slot" id="btn-focus-p2">Escolher J2</button>
+                            </div>
+                            <div class="slot-content">
+                                <canvas id="slot-p2-canvas" width="90" height="105"></canvas>
+                                <div class="slot-meta">
+                                    <strong id="slot-p2-char">Selecione abaixo</strong>
+                                    <small id="slot-p2-spec">—</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="select-cards-grid" id="select-cards-grid"></div>
+
+                    <div class="form-error hidden" id="select-error" role="alert"></div>
+
+                    <div class="select-footer">
+                        <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-go-confirm">
+                            AVANÇAR PARA CONFIRMAÇÃO →
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 5: CONFIRMAÇÃO PRÉ-LUTA
+            ================================================================ -->
+            <section class="screen" id="screen-confirm" aria-labelledby="confirm-match-title">
+                <div class="nb-panel confirm-match-panel">
+                    <h2 id="confirm-match-title">TUDO PRONTO PARA O COMBATE! 🔥</h2>
+                    <div class="confirm-arena-pill" id="confirm-arena-name">Arena: NEON CITY</div>
+
+                    <div class="confirm-vs-grid">
+                        <div class="confirm-fighter-card p1-card">
+                            <span class="player-tag tag-red" id="conf-p1-player">Jogador 1</span>
+                            <canvas id="conf-p1-canvas" width="150" height="170"></canvas>
+                            <h3 id="conf-p1-char">Kairo</h3>
+                            <small id="conf-p1-special">Especial: Corte do Dragão</small>
+                        </div>
+
+                        <div class="confirm-vs-text">VS</div>
+
+                        <div class="confirm-fighter-card p2-card">
+                            <span class="player-tag tag-blue" id="conf-p2-player">Jogador 2</span>
+                            <canvas id="conf-p2-canvas" width="150" height="170"></canvas>
+                            <h3 id="conf-p2-char">Freya</h3>
+                            <small id="conf-p2-special">Especial: Lança Celestial</small>
+                        </div>
+                    </div>
+
+                    <div class="confirm-actions">
+                        <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-confirm-back">← ALTERAR</button>
+                        <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-start-fight">COMEÇAR LUTA! 🥊</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 6: ARENA DE COMBATE / TREINAMENTO
+            ================================================================ -->
+            <section class="screen" id="screen-fight" aria-label="Arena de combate">
+                <div class="fight-wrapper">
+                    <!-- HUD DE COMBATE -->
+                    <div class="fight-hud" id="fight-hud">
+                        <!-- JOGADOR 1 -->
+                        <div class="hud-fighter hud-left">
+                            <canvas class="hud-portrait" id="hud-p1-portrait" width="56" height="56"></canvas>
+                            <div class="hud-bars-col">
+                                <div class="hud-name-line">
+                                    <strong id="hud-p1-player">Jogador 1</strong>
+                                    <span id="hud-p1-char">KAIRO</span>
+                                    <span class="hud-hp-num" id="hud-p1-hp-num">100</span>
+                                </div>
+                                <div class="hp-track">
+                                    <div class="hp-trail" id="hud-p1-hp-trail" style="width:100%"></div>
+                                    <div class="hp-fill hp-p1" id="hud-p1-hp-fill" style="width:100%"></div>
+                                </div>
+                                <div class="hud-sub-row">
+                                    <div class="energy-track" id="hud-p1-energy-wrap">
+                                        <div class="energy-fill" id="hud-p1-energy-fill" style="width:0%"></div>
+                                        <span class="energy-label-txt" id="hud-p1-energy-txt">ESPECIAL [R]: 0%</span>
+                                    </div>
+                                    <div class="round-pips" id="hud-p1-rounds">
+                                        <span class="r-pip"></span><span class="r-pip"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CENTRO: ROUND & CRONÔMETRO -->
+                        <div class="hud-center">
+                            <span class="hud-round-tag" id="hud-round-label">ROUND 1</span>
+                            <div class="hud-clock" id="hud-clock">99</div>
+                            <button type="button" class="nb-btn nb-btn-xs btn-pause-esc" id="btn-fight-pause" title="Pausar (ESC)">⏸ ESC</button>
+                        </div>
+
+                        <!-- JOGADOR 2 -->
+                        <div class="hud-fighter hud-right">
+                            <div class="hud-bars-col">
+                                <div class="hud-name-line right-align">
+                                    <span class="hud-hp-num" id="hud-p2-hp-num">100</span>
+                                    <span id="hud-p2-char">FREYA</span>
+                                    <strong id="hud-p2-player">Jogador 2</strong>
+                                </div>
+                                <div class="hp-track reverse-track">
+                                    <div class="hp-trail" id="hud-p2-hp-trail" style="width:100%"></div>
+                                    <div class="hp-fill hp-p2" id="hud-p2-hp-fill" style="width:100%"></div>
+                                </div>
+                                <div class="hud-sub-row reverse-sub">
+                                    <div class="round-pips" id="hud-p2-rounds">
+                                        <span class="r-pip"></span><span class="r-pip"></span>
+                                    </div>
+                                    <div class="energy-track" id="hud-p2-energy-wrap">
+                                        <div class="energy-fill" id="hud-p2-energy-fill" style="width:0%"></div>
+                                        <span class="energy-label-txt" id="hud-p2-energy-txt">ESPECIAL [NUM 5]: 0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <canvas class="hud-portrait" id="hud-p2-portrait" width="56" height="56"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- CANVAS DA ARENA -->
+                    <div class="arena-container" id="arena-container">
+                        <canvas id="fight-canvas" width="1120" height="580"></canvas>
+
+                        <!-- PAINEL DE TREINAMENTO (VISÍVEL APENAS NO MODO TREINO) -->
+                        <div class="training-bar hidden" id="training-bar">
+                            <div class="train-stats">
+                                <span>💥 Dano Combo: <strong id="tr-combo-dmg">0</strong></span>
+                                <span>🔥 Hits: <strong id="tr-combo-hits">0</strong></span>
+                                <span>🎯 Último Golpe: <strong id="tr-last-dmg">0</strong></span>
+                            </div>
+                            <div class="train-controls-hint">
+                                <kbd>A/D</kbd> Mover • <kbd>W</kbd> Pular • <kbd>S</kbd> Agachar • <kbd>J</kbd> Soco • <kbd>K</kbd> Defesa • <kbd>L</kbd> Chute • <kbd>R</kbd> Especial
+                            </div>
+                            <div class="train-btns">
+                                <button type="button" class="nb-btn nb-btn-xs btn-train" id="btn-tr-fill-spec">⚡ Encher Especial</button>
+                                <button type="button" class="nb-btn nb-btn-xs btn-secondary" id="btn-tr-reset-pos">🔄 Reposicionar</button>
+                                <button type="button" class="nb-btn nb-btn-xs btn-return" id="btn-tr-exit">🏠 Menu</button>
+                            </div>
+                        </div>
+
+                        <!-- OVERLAY: PAUSA -->
+                        <div class="arena-overlay hidden" id="overlay-pause" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+                            <div class="nb-panel overlay-card">
+                                <span class="overlay-pill pill-yellow">COMBATE CONGELADO</span>
+                                <h3 id="pause-title">PAUSA ⏸</h3>
+                                <div class="overlay-btns-col">
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-pause-resume">CONTINUAR ▶</button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-howto" id="btn-pause-restart">REINICIAR ROUND 🔄</button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-settings" id="btn-pause-audio">CONFIGURAÇÕES DE ÁUDIO 🔊</button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-return" id="btn-pause-menu">VOLTAR AO MENU 🏠</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERLAY: RESULTADO FINAL DA PARTIDA -->
+                        <div class="arena-overlay hidden" id="overlay-result">
+                            <div class="nb-panel overlay-card result-card">
+                                <span class="overlay-pill pill-yellow">🏆 FIM DE LUTA 🏆</span>
+                                <h3 id="res-winner-title">VENCEDOR!</h3>
+                                <p class="res-winner-sub" id="res-winner-sub">Jogador 1 venceu com Kairo</p>
+
+                                <div class="res-summary-grid">
+                                    <div class="res-box res-win-box">
+                                        <span>VENCEDOR</span>
+                                        <strong id="res-win-player">Jogador 1</strong>
+                                        <small id="res-win-char">Kairo</small>
+                                    </div>
+                                    <div class="res-score-mid">
+                                        <strong id="res-rounds-score">2 - 0</strong>
+                                        <small>ROUNDS</small>
+                                    </div>
+                                    <div class="res-box res-lose-box">
+                                        <span>DERROTADO</span>
+                                        <strong id="res-lose-player">Jogador 2</strong>
+                                        <small id="res-lose-char">Freya</small>
+                                    </div>
+                                </div>
+
+                                <div class="overlay-btns-row">
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-res-rematch">REVANCHE ⚔️</button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-secondary" id="btn-res-menu">VOLTAR AO MENU 🏠</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL: COMO JOGAR -->
+    <div class="modal-backdrop hidden" id="modal-howto" role="dialog" aria-modal="true" aria-labelledby="howto-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="howto-title">COMO JOGAR 📖</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-howto">✕</button>
+            </div>
+            <div class="howto-grid">
+                <div class="howto-box p1-box">
+                    <h3>🔴 JOGADOR 1</h3>
+                    <ul>
+                        <li><kbd>A</kbd> / <kbd>D</kbd> — Mover esquerda / direita</li>
+                        <li><kbd>W</kbd> — Pular</li>
+                        <li><kbd>S</kbd> — Agachar</li>
+                        <li><kbd>J</kbd> — Soco rápido (inicia combos)</li>
+                        <li><kbd>K</kbd> — Defesa (segure para reduzir dano)</li>
+                        <li><kbd>L</kbd> — Chute forte (empurra o rival)</li>
+                        <li><kbd>R</kbd> — Golpe Especial (barra cheia)</li>
+                    </ul>
+                </div>
+                <div class="howto-box p2-box">
+                    <h3>🔵 JOGADOR 2</h3>
+                    <ul>
+                        <li><kbd>←</kbd> / <kbd>→</kbd> — Mover esquerda / direita</li>
+                        <li><kbd>↑</kbd> — Pular</li>
+                        <li><kbd>↓</kbd> — Agachar</li>
+                        <li><kbd>NUMPAD 1</kbd> — Soco rápido</li>
+                        <li><kbd>NUMPAD 2</kbd> — Defesa (segure para bloquear)</li>
+                        <li><kbd>NUMPAD 3</kbd> — Chute forte</li>
+                        <li><kbd>NUMPAD 5</kbd> — Golpe Especial (barra cheia)</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="howto-note">Dica: Use <kbd>ESC</kbd> a qualquer momento durante a luta para pausar. Vence quem ganhar 2 rounds primeiro!</p>
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-ok-howto">VAMOS LUTAR! 🥊</button>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIGURAÇÕES -->
+    <div class="modal-backdrop hidden" id="modal-settings" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="settings-title">CONFIGURAÇÕES ⚙️</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-settings">✕</button>
+            </div>
+            <div class="settings-list">
+                <div class="setting-row">
+                    <label for="cfg-master-vol">🔊 Volume Geral <strong id="lbl-master-vol">80%</strong></label>
+                    <input type="range" id="cfg-master-vol" min="0" max="100" value="80">
+                </div>
+                <div class="setting-row">
+                    <div class="setting-split">
+                        <label for="cfg-music-vol">🎵 Música <strong id="lbl-music-vol">50%</strong></label>
+                        <button type="button" class="nb-btn nb-btn-xs btn-audio" id="cfg-music-btn">ON</button>
+                    </div>
+                    <input type="range" id="cfg-music-vol" min="0" max="100" value="50">
+                </div>
+                <div class="setting-row">
+                    <div class="setting-split">
+                        <label for="cfg-sfx-vol">💥 Efeitos Sonoros <strong id="lbl-sfx-vol">80%</strong></label>
+                        <button type="button" class="nb-btn nb-btn-xs btn-audio" id="cfg-sfx-btn">ON</button>
+                    </div>
+                    <input type="range" id="cfg-sfx-vol" min="0" max="100" value="80">
+                </div>
+                <div class="setting-row">
+                    <label for="cfg-fx-quality">✨ Qualidade dos Efeitos Visuais</label>
+                    <select id="cfg-fx-quality">
+                        <option value="low">Econômica</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="high">Alta</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-ok-settings">SALVAR E FECHAR ✅</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

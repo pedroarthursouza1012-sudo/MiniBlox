@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTBLOX — MiniBlox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <!-- HEADER PADRÃO MINIBLOX -->
+        <header class="top-header" id="top-header">
+            <div class="header-brand">
+                <span class="brand-badge">MINIBLOX</span>
+                <h1>FUTBLOX ⚽</h1>
+            </div>
+
+            <div class="header-actions">
+                <button type="button" class="nb-btn nb-btn-sm btn-audio" id="quick-music-btn" aria-pressed="true">
+                    🎵 Música: ON
+                </button>
+                <button type="button" class="nb-btn nb-btn-sm btn-audio" id="quick-sfx-btn" aria-pressed="true">
+                    🔊 Efeitos: ON
+                </button>
+                <a href="../index.html" class="nb-btn nb-btn-sm btn-return" id="header-back-miniblox">
+                    MiniBlox 🎮
+                </a>
+            </div>
+        </header>
+
+        <main class="main-stage">
+            <!-- ===============================================================
+                 TELA 1: MENU INICIAL
+            ================================================================ -->
+            <section class="screen active" id="screen-menu" aria-labelledby="menu-logo">
+                <div class="nb-panel menu-panel">
+                    <div class="menu-grid">
+                        <div class="menu-left">
+                            <span class="pill-tag">SÉRIE A 2026 • 2 JOGADORES LOCAIS</span>
+                            <h2 id="menu-logo" class="game-logo">FUTBLOX</h2>
+                            <p class="menu-subtitle">
+                                Duelo arcade 2D no mesmo teclado! Personalize seu craque, escolha entre os 20 clubes da Série A 2026 e domine a bola com física real.
+                            </p>
+
+                            <div class="menu-buttons-grid">
+                                <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-menu-play">
+                                    JOGAR ⚽
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-lg btn-history" id="btn-menu-history">
+                                    HISTÓRICO 🏆
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-lg btn-howto" id="btn-menu-howto">
+                                    COMO JOGAR 📖
+                                </button>
+                                <button type="button" class="nb-btn nb-btn-lg btn-settings" id="btn-menu-settings">
+                                    CONFIGURAÇÕES ⚙️
+                                </button>
+                            </div>
+
+                            <div class="menu-controls-summary">
+                                <span><strong>J1:</strong> <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
+                                <span><strong>J2:</strong> <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span>
+                                <span><strong>Pausa:</strong> <kbd>ESC</kbd></span>
+                            </div>
+                        </div>
+
+                        <div class="menu-right">
+                            <div class="menu-art-card">
+                                <svg class="menu-soccer-svg" viewBox="0 0 320 260" role="img" aria-label="Ilustração temática de campo e bola de futebol">
+                                    <rect x="14" y="20" width="292" height="200" rx="14" fill="#3eb548" stroke="#000" stroke-width="5"/>
+                                    <rect x="28" y="34" width="264" height="172" rx="6" fill="none" stroke="#fff" stroke-width="4"/>
+                                    <line x1="160" y1="34" x2="160" y2="206" stroke="#fff" stroke-width="4"/>
+                                    <circle cx="160" cy="120" r="36" fill="none" stroke="#fff" stroke-width="4"/>
+                                    <rect x="28" y="76" width="38" height="88" fill="none" stroke="#fff" stroke-width="4"/>
+                                    <rect x="254" y="76" width="38" height="88" fill="none" stroke="#fff" stroke-width="4"/>
+                                    <!-- Bola animada -->
+                                    <g class="svg-ball-bounce">
+                                        <circle cx="164" cy="124" r="34" fill="#000" opacity="0.22"/>
+                                        <circle cx="160" cy="120" r="34" fill="#ffffff" stroke="#000" stroke-width="4.5"/>
+                                        <polygon points="160,104 174,114 169,130 151,130 146,114" fill="#111"/>
+                                        <polygon points="160,87 168,94 152,94" fill="#111"/>
+                                        <polygon points="191,115 184,124 182,107" fill="#111"/>
+                                        <polygon points="129,115 136,124 138,107" fill="#111"/>
+                                        <polygon points="145,148 153,139 138,139" fill="#111"/>
+                                        <polygon points="175,148 167,139 182,139" fill="#111"/>
+                                    </g>
+                                </svg>
+                                <div class="art-caption">
+                                    <strong>2 TEMPOS DE 03:00</strong>
+                                    <span>Intervalo de 10s + Troca de lados</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 2: CONFIGURAÇÃO DOS JOGADORES E TIMES (20 CLUBES)
+            ================================================================ -->
+            <section class="screen" id="screen-setup" aria-labelledby="setup-title">
+                <div class="nb-panel setup-panel">
+                    <div class="setup-top-bar">
+                        <div>
+                            <h2 id="setup-title">CONFIGURAÇÃO DA PARTIDA 👕</h2>
+                            <p>Personalize os dois jogadores e escolha times diferentes da Série A 2026.</p>
+                        </div>
+                        <button type="button" class="nb-btn nb-btn-sm btn-secondary" id="btn-setup-back">
+                            ← MENU
+                        </button>
+                    </div>
+
+                    <!-- Cards dos 2 jogadores -->
+                    <div class="players-config-grid">
+                        <!-- JOGADOR 1 -->
+                        <div class="player-config-card p1-border" id="p1-config-card">
+                            <div class="pc-header">
+                                <span class="player-badge p1-badge">JOGADOR 1 • WASD</span>
+                                <span class="club-pill" id="p1-club-pill">Sem time</span>
+                            </div>
+
+                            <div class="pc-body">
+                                <div class="pc-preview-col">
+                                    <canvas class="preview-canvas" id="p1-preview-canvas" width="130" height="156"></canvas>
+                                    <button type="button" class="nb-btn nb-btn-sm btn-pick-club active-picker" id="btn-target-p1">
+                                        Selecionar Time (J1)
+                                    </button>
+                                </div>
+
+                                <div class="pc-fields-col">
+                                    <div class="field-group">
+                                        <label for="p1-name-input">Nome</label>
+                                        <input type="text" id="p1-name-input" placeholder="Jogador 1" maxlength="14" autocomplete="off">
+                                    </div>
+
+                                    <div class="field-row-2">
+                                        <div class="field-group">
+                                            <label for="p1-gender-select">Gênero</label>
+                                            <select id="p1-gender-select">
+                                                <option value="masculino">Masculino</option>
+                                                <option value="feminino">Feminino</option>
+                                            </select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label for="p1-hairstyle-select">Cabelo</label>
+                                            <select id="p1-hairstyle-select"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="field-group">
+                                        <span class="swatch-label">Tom de Pele</span>
+                                        <div class="swatch-row" id="p1-skin-swatches"></div>
+                                    </div>
+
+                                    <div class="field-group">
+                                        <span class="swatch-label">Cor do Cabelo</span>
+                                        <div class="swatch-row" id="p1-hair-swatches"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- JOGADOR 2 -->
+                        <div class="player-config-card p2-border" id="p2-config-card">
+                            <div class="pc-header">
+                                <span class="player-badge p2-badge">JOGADOR 2 • SETAS</span>
+                                <span class="club-pill" id="p2-club-pill">Sem time</span>
+                            </div>
+
+                            <div class="pc-body">
+                                <div class="pc-preview-col">
+                                    <canvas class="preview-canvas" id="p2-preview-canvas" width="130" height="156"></canvas>
+                                    <button type="button" class="nb-btn nb-btn-sm btn-pick-club" id="btn-target-p2">
+                                        Selecionar Time (J2)
+                                    </button>
+                                </div>
+
+                                <div class="pc-fields-col">
+                                    <div class="field-group">
+                                        <label for="p2-name-input">Nome</label>
+                                        <input type="text" id="p2-name-input" placeholder="Jogador 2" maxlength="14" autocomplete="off">
+                                    </div>
+
+                                    <div class="field-row-2">
+                                        <div class="field-group">
+                                            <label for="p2-gender-select">Gênero</label>
+                                            <select id="p2-gender-select">
+                                                <option value="masculino">Masculino</option>
+                                                <option value="feminino">Feminino</option>
+                                            </select>
+                                        </div>
+                                        <div class="field-group">
+                                            <label for="p2-hairstyle-select">Cabelo</label>
+                                            <select id="p2-hairstyle-select"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="field-group">
+                                        <span class="swatch-label">Tom de Pele</span>
+                                        <div class="swatch-row" id="p2-skin-swatches"></div>
+                                    </div>
+
+                                    <div class="field-group">
+                                        <span class="swatch-label">Cor do Cabelo</span>
+                                        <div class="swatch-row" id="p2-hair-swatches"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seletor dos 20 clubes -->
+                    <div class="clubs-section">
+                        <div class="clubs-section-header">
+                            <div>
+                                <h3>CLUBES DA SÉRIE A 2026 (20 TIMES)</h3>
+                                <span class="target-indicator" id="club-target-indicator">
+                                    Escolhendo time para: <strong>Jogador 1</strong>
+                                </span>
+                            </div>
+                            <div class="target-switch-btns">
+                                <button type="button" class="nb-btn nb-btn-sm btn-target-tab is-active" id="tab-pick-p1">Time J1</button>
+                                <button type="button" class="nb-btn nb-btn-sm btn-target-tab" id="tab-pick-p2">Time J2</button>
+                            </div>
+                        </div>
+
+                        <div class="clubs-grid" id="clubs-grid"></div>
+                    </div>
+
+                    <div class="setup-error hidden" id="setup-error" role="alert"></div>
+
+                    <div class="setup-footer">
+                        <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-start-match">
+                            INICIAR PARTIDA ⚽
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 3: PARTIDA (HUD + CAMPO CANVAS 2D + OVERLAYS)
+            ================================================================ -->
+            <section class="screen" id="screen-game" aria-label="Partida de FutBlox">
+                <div class="game-layout">
+                    <!-- HUD SUPERIOR -->
+                    <div class="match-hud">
+                        <div class="hud-team-box hud-p1">
+                            <div class="hud-player-meta">
+                                <span class="hud-player-name p1-name-tag" id="hud-p1-name">Jogador 1</span>
+                                <span class="hud-club-name" id="hud-p1-club">Flamengo</span>
+                            </div>
+                            <div class="hud-score" id="hud-p1-score">0</div>
+                        </div>
+
+                        <div class="hud-clock-box">
+                            <span class="hud-half-label" id="hud-half-label">1º TEMPO</span>
+                            <div class="hud-clock-value" id="hud-clock">03:00</div>
+                        </div>
+
+                        <div class="hud-team-box hud-p2">
+                            <div class="hud-score" id="hud-p2-score">0</div>
+                            <div class="hud-player-meta align-right">
+                                <span class="hud-player-name p2-name-tag" id="hud-p2-name">Jogador 2</span>
+                                <span class="hud-club-name" id="hud-p2-club">Palmeiras</span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="nb-btn nb-btn-sm btn-pause-hud" id="btn-pause-hud" title="Pausar Partida (ESC)" aria-label="Pausar Partida">
+                            ⏸ PAUSAR
+                        </button>
+                    </div>
+
+                    <!-- CONTAINER DO CAMPO -->
+                    <div class="pitch-frame" id="pitch-frame">
+                        <canvas id="game-canvas" width="1100" height="640"></canvas>
+
+                        <!-- OVERLAY: INTERVALO (10s) -->
+                        <div class="pitch-overlay hidden" id="overlay-halftime">
+                            <div class="overlay-card halftime-card">
+                                <span class="overlay-pill pill-cyan">FIM DO 1º TEMPO</span>
+                                <h3>INTERVALO 🔄</h3>
+                                <p class="halftime-swap-msg">Os jogadores vão trocar de lado no campo!</p>
+                                <div class="halftime-scoreboard">
+                                    <div class="ht-team">
+                                        <span id="ht-p1-club">Time 1</span>
+                                        <strong id="ht-p1-score">0</strong>
+                                    </div>
+                                    <span class="ht-x">X</span>
+                                    <div class="ht-team">
+                                        <strong id="ht-p2-score">0</strong>
+                                        <span id="ht-p2-club">Time 2</span>
+                                    </div>
+                                </div>
+                                <div class="halftime-countdown-box">
+                                    2º tempo começa em <strong id="ht-countdown">10</strong>s
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERLAY: JOGO PAUSADO -->
+                        <div class="pitch-overlay hidden" id="overlay-pause" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+                            <div class="overlay-card pause-card">
+                                <span class="overlay-pill pill-yellow">PARTIDA CONGELADA</span>
+                                <h3 id="pause-title">JOGO PAUSADO ⏸</h3>
+                                <p class="pause-subtext" id="pause-subtext">Tudo congelado. Pronto para voltar ao campo?</p>
+
+                                <div class="pause-actions">
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-pause-resume">
+                                        CONTINUAR ▶
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-settings" id="btn-pause-audio">
+                                        CONFIGURAÇÕES DE ÁUDIO 🔊
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-howto" id="btn-pause-restart">
+                                        REINICIAR PARTIDA 🔄
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-return" id="btn-pause-menu">
+                                        VOLTAR AO MENU 🏠
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 4: RESULTADO FINAL
+            ================================================================ -->
+            <section class="screen" id="screen-results" aria-labelledby="results-heading">
+                <div class="nb-panel results-panel">
+                    <div class="results-banner" id="results-banner">
+                        <span class="results-trophy" id="results-trophy">🏆</span>
+                        <h2 id="results-heading">FIM DE JOGO!</h2>
+                        <p id="results-winner-text">Vitória do Flamengo!</p>
+                    </div>
+
+                    <div class="results-scoreboard-card">
+                        <div class="res-player-col p1-res" id="res-p1-col">
+                            <canvas class="res-avatar-canvas" id="res-p1-canvas" width="96" height="96"></canvas>
+                            <strong id="res-p1-name">Jogador 1</strong>
+                            <span class="res-club-badge" id="res-p1-club">Time 1</span>
+                        </div>
+
+                        <div class="res-score-center">
+                            <span id="res-p1-score">0</span>
+                            <small>X</small>
+                            <span id="res-p2-score">0</span>
+                        </div>
+
+                        <div class="res-player-col p2-res" id="res-p2-col">
+                            <canvas class="res-avatar-canvas" id="res-p2-canvas" width="96" height="96"></canvas>
+                            <strong id="res-p2-name">Jogador 2</strong>
+                            <span class="res-club-badge" id="res-p2-club">Time 2</span>
+                        </div>
+                    </div>
+
+                    <div class="results-actions">
+                        <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-results-rematch">
+                            JOGAR NOVAMENTE 🔄
+                        </button>
+                        <button type="button" class="nb-btn nb-btn-lg btn-history" id="btn-results-history">
+                            VER HISTÓRICO 🏆
+                        </button>
+                        <button type="button" class="nb-btn nb-btn-lg btn-secondary" id="btn-results-menu">
+                            VOLTAR AO MENU 🏠
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 5: HISTÓRICO DE PARTIDAS
+            ================================================================ -->
+            <section class="screen" id="screen-history" aria-labelledby="history-title">
+                <div class="nb-panel history-panel">
+                    <div class="history-top-bar">
+                        <div>
+                            <h2 id="history-title">HISTÓRICO DE PARTIDAS 🏆</h2>
+                            <p>Até 100 partidas encerradas salvas no seu navegador.</p>
+                        </div>
+                        <div class="history-top-btns">
+                            <button type="button" class="nb-btn nb-btn-sm btn-return" id="btn-history-clear">
+                                EXCLUIR HISTÓRICO 🗑️
+                            </button>
+                            <button type="button" class="nb-btn nb-btn-sm btn-secondary" id="btn-history-back">
+                                ← VOLTAR
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Estado vazio -->
+                    <div class="history-empty hidden" id="history-empty">
+                        <svg class="empty-ball-svg" viewBox="0 0 120 120" aria-hidden="true">
+                            <circle cx="60" cy="60" r="46" fill="#fff" stroke="#000" stroke-width="5"/>
+                            <polygon points="60,38 79,52 72,74 48,74 41,52" fill="#111"/>
+                            <polygon points="60,15 70,25 50,25" fill="#111"/>
+                            <polygon points="102,54 92,65 90,44" fill="#111"/>
+                            <polygon points="18,54 28,65 30,44" fill="#111"/>
+                            <polygon points="40,98 51,86 32,86" fill="#111"/>
+                            <polygon points="80,98 69,86 88,86" fill="#111"/>
+                        </svg>
+                        <h3>NENHUMA PARTIDA REGISTRADA</h3>
+                        <p>Jogue sua primeira partida para começar seu histórico!</p>
+                        <button type="button" class="nb-btn nb-btn-md btn-play" id="btn-empty-back">
+                            VOLTAR AO MENU
+                        </button>
+                    </div>
+
+                    <!-- Lista de registros -->
+                    <div class="history-list" id="history-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- =======================================================================
+         MODAL: COMO JOGAR
+    ======================================================================== -->
+    <div class="modal-backdrop hidden" id="modal-howto" role="dialog" aria-modal="true" aria-labelledby="howto-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="howto-title">COMO JOGAR 📖</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-howto">✕</button>
+            </div>
+            <div class="howto-items">
+                <div class="howto-row">
+                    <span class="howto-num">1</span>
+                    <div>
+                        <strong>Movimentação simultânea</strong>
+                        <p>Jogador 1 usa <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>. Jogador 2 usa as <kbd>Setas</kbd>. Corra contra a bola para impulsioná-la!</p>
+                    </div>
+                </div>
+                <div class="howto-row">
+                    <span class="howto-num">2</span>
+                    <div>
+                        <strong>Física e Controle da Bola</strong>
+                        <p>Quanto maior a sua velocidade ao encostar na bola, mais forte será o chute. Use ângulos laterais para driblar e finalizar.</p>
+                    </div>
+                </div>
+                <div class="howto-row">
+                    <span class="howto-num">3</span>
+                    <div>
+                        <strong>2 Tempos de 3 Minutos</strong>
+                        <p>Cada partida tem 1º tempo (03:00), intervalo de 10 segundos com troca de lados e 2º tempo (03:00).</p>
+                    </div>
+                </div>
+                <div class="howto-row">
+                    <span class="howto-num">4</span>
+                    <div>
+                        <strong>Pausa e Histórico</strong>
+                        <p>Pressione <kbd>ESC</kbd> ou clique em ⏸ PAUSAR a qualquer momento. Partidas finalizadas são salvas automaticamente no Histórico.</p>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-ok-howto">ENTENDI! ⚽</button>
+        </div>
+    </div>
+
+    <!-- =======================================================================
+         MODAL: CONFIGURAÇÕES DE ÁUDIO
+    ======================================================================== -->
+    <div class="modal-backdrop hidden" id="modal-settings" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="settings-title">CONFIGURAÇÕES DE ÁUDIO ⚙️</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-settings">✕</button>
+            </div>
+            <div class="settings-list">
+                <div class="setting-box">
+                    <div class="setting-top">
+                        <strong>🎵 Música de Fundo</strong>
+                        <button type="button" class="nb-btn nb-btn-sm btn-audio" id="set-music-toggle">ON</button>
+                    </div>
+                    <label for="set-music-vol">Volume da Música: <span id="set-music-val">45%</span></label>
+                    <input type="range" id="set-music-vol" min="0" max="100" value="45">
+                </div>
+
+                <div class="setting-box">
+                    <div class="setting-top">
+                        <strong>🔊 Efeitos Sonoros</strong>
+                        <button type="button" class="nb-btn nb-btn-sm btn-audio" id="set-sfx-toggle">ON</button>
+                    </div>
+                    <label for="set-sfx-vol">Volume dos Efeitos: <span id="set-sfx-val">75%</span></label>
+                    <input type="range" id="set-sfx-vol" min="0" max="100" value="75">
+                </div>
+            </div>
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-ok-settings">SALVAR E FECHAR ✅</button>
+        </div>
+    </div>
+
+    <!-- =======================================================================
+         MODAL: CONFIRMAÇÃO GENÉRICA (REINICIAR / SAIR / LIMPAR HISTÓRICO)
+    ======================================================================== -->
+    <div class="modal-backdrop hidden" id="modal-confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+        <div class="nb-panel modal-card confirm-card">
+            <h2 id="confirm-title">CONFIRMAÇÃO</h2>
+            <p id="confirm-message">Deseja realmente continuar?</p>
+            <div class="confirm-btns">
+                <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-confirm-cancel">CANCELAR</button>
+                <button type="button" class="nb-btn nb-btn-md btn-return" id="btn-confirm-yes">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

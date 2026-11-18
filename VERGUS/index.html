@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERGUS — MiniBlox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <!-- HEADER PADRÃO MINIBLOX -->
+        <header class="top-header">
+            <div class="header-brand">
+                <span class="brand-badge">MINIBLOX</span>
+                <h1>VERGUS ⚡</h1>
+            </div>
+
+            <div class="header-actions">
+                <button type="button" class="nb-btn nb-btn-sm btn-audio" id="header-music-btn" aria-pressed="true">
+                    🎵 Música: ON
+                </button>
+                <button type="button" class="nb-btn nb-btn-sm btn-audio" id="header-sfx-btn" aria-pressed="true">
+                    🔊 Efeitos: ON
+                </button>
+                <a href="../index.html" class="nb-btn nb-btn-sm btn-return">
+                    MiniBlox 🎮
+                </a>
+            </div>
+        </header>
+
+        <main class="main-stage">
+            <!-- ===============================================================
+                 TELA 1: MENU PRINCIPAL + ESTATÍSTICAS E HISTÓRICO
+            ================================================================ -->
+            <section class="screen active" id="screen-menu" aria-labelledby="menu-title">
+                <div class="menu-stack">
+                    <div class="nb-panel menu-panel">
+                        <div class="menu-hero">
+                            <div class="menu-left">
+                                <span class="pill-tag">LABIRINTO ARCADE • 10 FASES + MODO INFINITO</span>
+                                <h2 id="menu-title" class="game-logo">VERGUS</h2>
+                                <p class="menu-tagline">ESCAPE DO LABIRINTO. SUPERE SEUS LIMITES.</p>
+
+                                <div class="menu-buttons-grid">
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-menu-play">
+                                        JOGAR ▶
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-continue" id="btn-menu-continue">
+                                        CONTINUAR ⏩
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-levels" id="btn-menu-levels">
+                                        FASES 🗺️
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-infinite" id="btn-menu-infinite">
+                                        MODO INFINITO ∞
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-howto" id="btn-menu-howto">
+                                        COMO JOGAR 📖
+                                    </button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-settings" id="btn-menu-settings">
+                                        CONFIGURAÇÕES ⚙️
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="menu-right">
+                                <div class="player-profile-card">
+                                    <div class="profile-top">
+                                        <canvas id="menu-avatar-canvas" width="96" height="96"></canvas>
+                                        <div class="profile-identity">
+                                            <span class="profile-label">EXPLORADOR</span>
+                                            <strong id="menu-player-name">Jogador</strong>
+                                            <span class="vest-tag" id="menu-vest-tag">Avatar MiniBlox</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-stats-mini">
+                                        <div class="mini-stat">
+                                            <span>Melhor Pontuação</span>
+                                            <strong id="menu-best-score">0</strong>
+                                        </div>
+                                        <div class="mini-stat">
+                                            <span>Fase Atual</span>
+                                            <strong id="menu-current-level">Fase 01</strong>
+                                        </div>
+                                        <div class="mini-stat">
+                                            <span>Fases Concluídas</span>
+                                            <strong id="menu-cleared-count">0 / 10</strong>
+                                        </div>
+                                        <div class="mini-stat">
+                                            <span>Moedas Totais</span>
+                                            <strong id="menu-total-coins">0</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO DE ESTATÍSTICAS E HISTÓRICO NO MENU PRINCIPAL -->
+                    <div class="nb-panel stats-history-panel">
+                        <div class="sh-tabs">
+                            <button type="button" class="nb-btn nb-btn-sm tab-btn is-active" id="tab-stats-btn">
+                                📊 ESTATÍSTICAS
+                            </button>
+                            <button type="button" class="nb-btn nb-btn-sm tab-btn" id="tab-history-btn">
+                                📜 HISTÓRICO DE PARTIDAS
+                            </button>
+                        </div>
+
+                        <div class="tab-content" id="panel-stats">
+                            <div class="stats-overview-grid">
+                                <div class="stat-box"><span>Pontuação Total</span><strong id="st-total-score">0</strong></div>
+                                <div class="stat-box"><span>Melhor Pontuação</span><strong id="st-best-score">0</strong></div>
+                                <div class="stat-box"><span>Fases Concluídas</span><strong id="st-cleared">0 / 10</strong></div>
+                                <div class="stat-box"><span>Maior Sequência</span><strong id="st-streak">0</strong></div>
+                                <div class="stat-box"><span>Moedas Coletadas</span><strong id="st-coins">0</strong></div>
+                                <div class="stat-box"><span>Tentativas</span><strong id="st-attempts">0</strong></div>
+                                <div class="stat-box"><span>Recorde Infinito (Dist.)</span><strong id="st-inf-dist">0 m</strong></div>
+                                <div class="stat-box"><span>Recorde Infinito (Pts)</span><strong id="st-inf-score">0</strong></div>
+                            </div>
+
+                            <div class="best-times-wrap">
+                                <h3>⏱️ Melhor Tempo por Fase</h3>
+                                <div class="best-times-grid" id="best-times-grid"></div>
+                            </div>
+                        </div>
+
+                        <div class="tab-content hidden" id="panel-history">
+                            <div class="history-list" id="history-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 2: SELEÇÃO DE FASES (10 FASES)
+            ================================================================ -->
+            <section class="screen" id="screen-levels" aria-labelledby="levels-title">
+                <div class="nb-panel levels-panel">
+                    <div class="panel-top-bar">
+                        <div>
+                            <h2 id="levels-title">CAMPANHA — 10 FASES 🗺️</h2>
+                            <p>Complete cada labirinto para desbloquear o próximo desafio e liberar o Modo Infinito.</p>
+                        </div>
+                        <button type="button" class="nb-btn nb-btn-sm btn-secondary" id="btn-levels-back">
+                            ← VOLTAR AO MENU
+                        </button>
+                    </div>
+
+                    <div class="levels-grid" id="levels-grid"></div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 TELA 3: PARTIDA (HUD + LABIRINTO CANVAS 2D + DICAS + CONTROLES)
+            ================================================================ -->
+            <section class="screen" id="screen-game" aria-label="Partida de Vertigo">
+                <div class="game-wrapper">
+                    <!-- HUD SUPERIOR DISCRETA -->
+                    <div class="game-hud">
+                        <div class="hud-cell hud-level-cell">
+                            <span class="hud-badge" id="hud-level-badge">FASE 01</span>
+                            <strong id="hud-level-name">FIRST STEPS</strong>
+                        </div>
+
+                        <div class="hud-cell hud-metrics-cell">
+                            <div class="hud-metric">
+                                <span>OBJETIVO</span>
+                                <strong id="hud-objective">0 / 6 🪙</strong>
+                            </div>
+                            <div class="hud-metric">
+                                <span>PONTOS</span>
+                                <strong id="hud-score">0</strong>
+                            </div>
+                            <div class="hud-metric">
+                                <span>MOEDAS</span>
+                                <strong id="hud-coins">0</strong>
+                            </div>
+                            <div class="hud-metric">
+                                <span>TEMPO</span>
+                                <strong id="hud-timer">00:00</strong>
+                            </div>
+                        </div>
+
+                        <div class="hud-cell hud-lives-cell">
+                            <div class="hud-lives" id="hud-lives" aria-label="Vidas restantes">❤️❤️❤️</div>
+                            <button type="button" class="nb-btn nb-btn-sm btn-pause" id="btn-hud-pause" title="Pausar (ESC)">
+                                ⏸ PAUSA
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ARENA ESCURA TECH-DUNGEON -->
+                    <div class="arena-frame" id="arena-frame">
+                        <canvas id="game-canvas" width="900" height="560"></canvas>
+
+                        <!-- Dica curta da fase (some automaticamente) -->
+                        <div class="phase-hint hidden" id="phase-hint"></div>
+
+                        <!-- OVERLAY: PAUSA -->
+                        <div class="game-overlay hidden" id="overlay-pause" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+                            <div class="overlay-card pause-card">
+                                <span class="overlay-pill pill-yellow">JOGO CONGELADO</span>
+                                <h3 id="pause-title">PAUSA ⏸</h3>
+                                <p>Tudo congelado com segurança.</p>
+                                <div class="overlay-btns">
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-pause-resume">CONTINUAR ▶</button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-howto" id="btn-pause-restart">REINICIAR FASE 🔄</button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-settings" id="btn-pause-settings">CONFIGURAÇÕES ⚙️</button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-return" id="btn-pause-exit">SAIR PARA O MENU 🏠</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERLAY: FASE CONCLUÍDA -->
+                        <div class="game-overlay hidden" id="overlay-clear">
+                            <div class="overlay-card clear-card">
+                                <span class="overlay-pill pill-green" id="clear-pill">FASE CONCLUÍDA!</span>
+                                <h3 id="clear-title">FIRST STEPS</h3>
+                                <div class="rank-badge" id="clear-rank">RANK S</div>
+                                <div class="clear-stats-grid">
+                                    <div><span>Pontuação</span><strong id="clear-score">0</strong></div>
+                                    <div><span>Tempo</span><strong id="clear-time">00:00</strong></div>
+                                    <div><span>Moedas</span><strong id="clear-coins">0</strong></div>
+                                    <div><span>Vidas</span><strong id="clear-lives">3</strong></div>
+                                </div>
+                                <div class="bonus-breakdown" id="clear-bonuses"></div>
+                                <div class="overlay-btns row-btns">
+                                    <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-clear-menu">MENU</button>
+                                    <button type="button" class="nb-btn nb-btn-md btn-howto" id="btn-clear-retry">REPETIR</button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-clear-next">PRÓXIMA FASE →</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERLAY: CAMPANHA CONCLUÍDA (FASE 10) -->
+                        <div class="game-overlay hidden" id="overlay-champion">
+                            <div class="overlay-card champion-card">
+                                <span class="overlay-pill pill-yellow">🏆 FASE 10 CONCLUÍDA! 🏆</span>
+                                <h3>CAMPEÃO DO LABIRINTO!</h3>
+                                <p>Você dominou todas as 10 fases e desbloqueou o <strong>MODO INFINITO ∞</strong>!</p>
+                                <div class="clear-stats-grid">
+                                    <div><span>Pontuação</span><strong id="champ-score">0</strong></div>
+                                    <div><span>Tempo</span><strong id="champ-time">00:00</strong></div>
+                                    <div><span>Moedas</span><strong id="champ-coins">0</strong></div>
+                                    <div><span>Desempenho</span><strong id="champ-rank">S</strong></div>
+                                </div>
+                                <div class="overlay-btns row-btns">
+                                    <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-champ-menu">MENU PRINCIPAL</button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-infinite" id="btn-champ-infinite">MODO INFINITO ∞</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERLAY: GAME OVER -->
+                        <div class="game-overlay hidden" id="overlay-gameover">
+                            <div class="overlay-card gameover-card">
+                                <span class="overlay-pill pill-red">SEM VIDAS 💥</span>
+                                <h3>GAME OVER</h3>
+                                <p id="go-subtitle">Você foi derrotado pelo labirinto.</p>
+                                <div class="clear-stats-grid">
+                                    <div><span>Pontuação</span><strong id="go-score">0</strong></div>
+                                    <div><span>Moedas</span><strong id="go-coins">0</strong></div>
+                                    <div><span id="go-extra-label">Tempo</span><strong id="go-extra-val">00:00</strong></div>
+                                    <div><span>Fase / Modo</span><strong id="go-mode-label">Fase 01</strong></div>
+                                </div>
+                                <div class="overlay-btns row-btns">
+                                    <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-go-menu">MENU PRINCIPAL</button>
+                                    <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-go-retry">TENTAR NOVAMENTE 🔄</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CONTROLES VIRTUAIS PARA TELAS TOUCH / MENORES -->
+                    <div class="touch-dpad" id="touch-dpad" aria-label="Controles direcionais">
+                        <button type="button" class="nb-btn dpad-btn dpad-up" data-dir="up" aria-label="Cima">▲</button>
+                        <div class="dpad-mid">
+                            <button type="button" class="nb-btn dpad-btn dpad-left" data-dir="left" aria-label="Esquerda">◀</button>
+                            <button type="button" class="nb-btn dpad-btn dpad-down" data-dir="down" aria-label="Baixo">▼</button>
+                            <button type="button" class="nb-btn dpad-btn dpad-right" data-dir="right" aria-label="Direita">▶</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- =======================================================================
+         MODAL: SOLICITAR NOME DO JOGADOR (QUANDO AUSENTE)
+    ======================================================================== -->
+    <div class="modal-backdrop hidden" id="modal-name" role="dialog" aria-modal="true" aria-labelledby="name-modal-title">
+        <div class="nb-panel modal-card">
+            <h2 id="name-modal-title">IDENTIFIQUE-SE, EXPLORADOR! 🧑‍🚀</h2>
+            <p>Não encontramos um nome salvo no MiniBlox. Digite seu nome para salvar seus recordes no VERGUS:</p>
+            <form id="name-modal-form" class="name-form" novalidate>
+                <input type="text" id="name-modal-input" placeholder="Seu nome (até 16 caracteres)" maxlength="16" autocomplete="off" required>
+                <div class="form-error hidden" id="name-modal-error"></div>
+                <div class="modal-btns-row">
+                    <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-name-cancel">CANCELAR</button>
+                    <button type="submit" class="nb-btn nb-btn-lg btn-play">SALVAR E CONTINUAR ▶</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =======================================================================
+         MODAL: COMO JOGAR
+    ======================================================================== -->
+    <div class="modal-backdrop hidden" id="modal-howto" role="dialog" aria-modal="true" aria-labelledby="howto-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="howto-title">COMO JOGAR 📖</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-howto">✕</button>
+            </div>
+            <div class="howto-list">
+                <div class="howto-item">
+                    <span class="howto-num">1</span>
+                    <div>
+                        <strong>Deslizamento Automático</strong>
+                        <p>Use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> ou as <kbd>Setas</kbd>. Você desliza em linha reta até encontrar uma parede!</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">2</span>
+                    <div>
+                        <strong>Fila de Comandos</strong>
+                        <p>Pressione a próxima direção ainda durante o deslizamento: o explorador executa a curva exatamente ao parar!</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">3</span>
+                    <div>
+                        <strong>Objetivo e Vidas</strong>
+                        <p>Colete a quantidade mínima de moedas da fase, ative checkpoints 🚩 e alcance o portal de saída verde. Você tem 3 vidas!</p>
+                    </div>
+                </div>
+                <div class="howto-item">
+                    <span class="howto-num">4</span>
+                    <div>
+                        <strong>Pausa & Modo Infinito</strong>
+                        <p>Pressione <kbd>ESC</kbd> para pausar a qualquer momento. Vença as 10 fases da campanha para desbloquear o Modo Infinito!</p>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-ok-howto">ENTENDI! ⚡</button>
+        </div>
+    </div>
+
+    <!-- =======================================================================
+         MODAL: CONFIGURAÇÕES (NOME, ÁUDIO E RESET COM CONFIRMAÇÃO)
+    ======================================================================== -->
+    <div class="modal-backdrop hidden" id="modal-settings" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="nb-panel modal-card">
+            <div class="modal-header">
+                <h2 id="settings-title">CONFIGURAÇÕES ⚙️</h2>
+                <button type="button" class="nb-btn nb-btn-sm btn-close-modal" id="btn-close-settings">✕</button>
+            </div>
+
+            <div class="settings-stack">
+                <div class="setting-box">
+                    <label for="settings-name-input"><strong>👤 Nome do Jogador</strong></label>
+                    <div class="name-edit-row">
+                        <input type="text" id="settings-name-input" maxlength="16" placeholder="Digite seu nome">
+                        <button type="button" class="nb-btn nb-btn-sm btn-play" id="btn-save-name">SALVAR</button>
+                    </div>
+                    <small class="form-error hidden" id="settings-name-error"></small>
+                </div>
+
+                <div class="setting-box">
+                    <div class="setting-top">
+                        <strong>🎵 Música Arcade</strong>
+                        <button type="button" class="nb-btn nb-btn-sm btn-audio" id="set-music-toggle">ON</button>
+                    </div>
+                    <label for="set-music-vol">Volume: <span id="set-music-val">45%</span></label>
+                    <input type="range" id="set-music-vol" min="0" max="100" value="45">
+                </div>
+
+                <div class="setting-box">
+                    <div class="setting-top">
+                        <strong>🔊 Efeitos Sonoros</strong>
+                        <button type="button" class="nb-btn nb-btn-sm btn-audio" id="set-sfx-toggle">ON</button>
+                    </div>
+                    <label for="set-sfx-vol">Volume: <span id="set-sfx-val">75%</span></label>
+                    <input type="range" id="set-sfx-vol" min="0" max="100" value="75">
+                </div>
+
+                <div class="setting-box danger-box" id="settings-reset-box">
+                    <strong>🗑️ Progresso</strong>
+                    <button type="button" class="nb-btn nb-btn-sm btn-return" id="btn-reset-save">
+                        APAGAR PROGRESSO DO VERGUS
+                    </button>
+                </div>
+            </div>
+
+            <button type="button" class="nb-btn nb-btn-lg btn-play" id="btn-ok-settings">FECHAR ✅</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div class="modal-backdrop hidden" id="modal-confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+        <div class="nb-panel modal-card confirm-card">
+            <h2 id="confirm-title">CONFIRMAÇÃO</h2>
+            <p id="confirm-message">Tem certeza?</p>
+            <div class="modal-btns-row">
+                <button type="button" class="nb-btn nb-btn-md btn-secondary" id="btn-confirm-cancel">CANCELAR</button>
+                <button type="button" class="nb-btn nb-btn-md btn-return" id="btn-confirm-yes">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
