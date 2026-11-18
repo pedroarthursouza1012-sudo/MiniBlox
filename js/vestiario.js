@@ -1,5 +1,5 @@
 const personagem = document.querySelector('.personagem');
-
+const genero = localStorage.getItem("genero");
 // Seletores
 const cabeloSelect = document.querySelector('#cabeloSelect');
 const corCabeloSelect = document.querySelector('#corCabeloSelect');
@@ -7,24 +7,44 @@ const peleSelect = document.querySelector('#peleSelect');
 const camisaSelect = document.querySelector('#camisaSelect');
 const calcaSelect = document.querySelector('#calcaSelect');
 const salvarBtn = document.querySelector('#salvarPersonagem');
-const personagemSalvo = JSON.parse(
-    localStorage.getItem('personagem')
-);
+let personagemSalvo = null;
+
+try {
+    personagemSalvo = JSON.parse(
+        localStorage.getItem('personagem')
+    );
+} catch (erro) {
+    console.error("Erro ao carregar personagem:", erro);
+}
 
 
 if (personagemSalvo) {
 
     cabeloSelect.value = personagemSalvo.cabelo;
-
     corCabeloSelect.value = personagemSalvo.corCabelo;
-
     peleSelect.value = personagemSalvo.pele;
-
     camisaSelect.value = personagemSalvo.camisa;
-
     calcaSelect.value = personagemSalvo.calca;
 
+} else {
+
+    cabeloSelect.value = "cabeloM";
+    corCabeloSelect.value = "cabelo4";
+    peleSelect.value = "pele1";
+    calcaSelect.value = "azul";
+
+    if (genero === "masculino") {
+        camisaSelect.value = "corInicial";
+
+    } else if (genero === "feminino") {
+        cabeloSelect.value = "cabeloF";
+        camisaSelect.value = "roxa";
+
+    } else {
+        camisaSelect.value = "corInicial";
+    }
 }
+
 
 
 cabeloSelect.addEventListener('change', () => {
@@ -133,3 +153,4 @@ salvarBtn.addEventListener('click', () => {
     alert('Personagem salvo com sucesso!');
     window.location.href = "index.html";
 });
+

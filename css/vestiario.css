@@ -27,6 +27,7 @@
     flex-direction: column;
     box-shadow: 10px 10px 0 black;
     background:rgb(104, 169, 255);
+    animation: fade-in .6s ease;
 }
 .personel{
     display: flex;
@@ -224,7 +225,7 @@ select:focus{
     --vermelha:rgb(238, 59, 59);
     --preta:rgb(35, 35, 37);
     --branca:rgb(230, 230, 230);
-    --roxa:purple;
+    --roxa:rgb(131, 3, 131);
     --amarela:rgb(255, 217, 0);
     --verde:rgb(204, 238, 55);
     --rosa:rgb(255, 82, 111);

@@ -1,39 +1,52 @@
-    const cadastro = document.querySelector(".cadastro");
-    const submitBtn = document.getElementById("submitBtn")
-    let nome = document.getElementById("nome");
-    let genero = document.querySelector('input[name="genero"]:checked')?.value;
-    const screen = document.querySelector(".screen")
-    const form = document.querySelector("form");
+const cadastro = document.querySelector(".cadastro");
+const submitBtn = document.getElementById("submitBtn");
+const nomeInput = document.getElementById("nome");
+const screen = document.querySelector(".screen");
+const form = document.querySelector("form");
 
+function verificarCadastro() {
+    if (localStorage.getItem("situacao") === "cadastrado") {
+        cadastro.style.opacity = "0";
+        cadastro.style.pointerEvents = "none";
 
-    function verificarCadastro(){
+        screen.style.filter = "blur(0px) brightness(1)";
+        screen.style.pointerEvents = "auto";
+    } else {
+        screen.style.filter = "blur(15px) brightness(.7)";
+        screen.style.pointerEvents = "none";
+    }
+}
 
-        if(localStorage.getItem("situacao")==="cadastrado"){
-            cadastro.style.opacity = '0';
-            cadastro.style.pointerEvents = "none";
-            screen.style.filter = "blur(0px) brightness(1)";
-            screen.style.pointerEvents = "auto"; 
-        }
-        return;
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const nome = nomeInput.value.trim();
+
+    const generoSelecionado = document.querySelector(
+        'input[name="genero"]:checked'
+    );
+
+    if (!generoSelecionado) return;
+
+    const genero = generoSelecionado.value;
+
+    localStorage.setItem("nome", nome);
+    
+    if (genero === "man") {
+        localStorage.setItem("genero", "masculino");
+    } else if (genero === "woman") {
+        localStorage.setItem("genero", "feminino");
+    } else {
+        localStorage.setItem("genero", "naoBinario");
     }
 
-    function cadastrar(){
+    localStorage.setItem("situacao", "cadastrado");
 
-        if(localStorage.getItem("situacao")==="cadastrado") return;
+    screen.style.filter = "blur(0px) brightness(1)";
+    screen.style.pointerEvents = "auto";
 
-        screen.style.filter = "blur(15px) brightness(.5)"
-        screen.style.pointerEvents = 'none'
-    }
+    cadastro.style.opacity = "0";
+    cadastro.style.pointerEvents = "none";
+});
 
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-            screen.style.filter = "blur(0px) brightness(1)"
-            screen.style.pointerEvents = 'auto'
-            cadastro.style.opacity = '0'
-            cadastro.style.pointerEvents = "none"
-            localStorage.setItem("situacao","cadastrado")
-    });
-
-    verificarCadastro()
-    cadastrar()
+verificarCadastro();
