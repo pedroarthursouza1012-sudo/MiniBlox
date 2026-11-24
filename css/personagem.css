@@ -1,0 +1,225 @@
+@keyframes piscar {
+    0%, 90%, 100% { transform: scaleY(1); }
+    93% { transform: scaleY(0.1); }
+    96% { transform: scaleY(1); }
+}
+
+/* CAMISAS DE TIME */
+.personagem {
+    --flamengo: repeating-linear-gradient(180deg, black 0px, black 10px, rgb(255, 47, 47) 10px, rgb(247, 49, 49) 20px);
+    --palmeiras: repeating-linear-gradient(90deg, #24af59 0px, #24af59 10px, #f1f1f1 10px, #f1f1f1 20px);
+    --corinthians: repeating-linear-gradient(90deg, black 0px, black 10px, white 10px, white 20px);
+    --fluminense: repeating-linear-gradient(90deg, #7b1535 0px, #7b1535 15px, white 15px, white 25px, #006b45 25px, #006b45 40px, white 40px, white 50px);
+    --sao-paulo: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 10px, #d71920 10px, #d71920 20px, #000000 20px, #000000 30px);
+    --bahia: repeating-linear-gradient(90deg, #005ca9 0px, #005ca9 10px, #ffffff 10px, #ffffff 20px, #d71920 20px, #d71920 30px);
+    --botafogo: repeating-linear-gradient(90deg, #000000 0px, #000000 10px, #ffffff 10px, #ffffff 20px);
+    --vasco: repeating-linear-gradient(90deg, #000000 0px, #000000 15px, #ffffff 15px, #ffffff 20px);
+    --gremio: repeating-linear-gradient(90deg, #0072bc 0px, #0072bc 10px, #000000 10px, #000000 20px, #ffffff 20px, #ffffff 30px);
+    --santos: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 15px, #111111 15px, #111111 20px);
+    --mirassol: repeating-linear-gradient(90deg, #008b45 0px, #008b45 10px, #ffdf00 10px, #ffdf00 20px);
+    --internacional: linear-gradient(180deg, #d71920 0%, #d71920 75%, #ffffff 75%, #ffffff 80%, #d71920 80%, #d71920 100%);
+
+    /* CAMISAS CASUAIS */
+    --azul: rgb(94, 152, 190);
+    --vermelha: rgb(238, 59, 59);
+    --preta: rgb(35, 35, 37);
+    --branca: rgb(230, 230, 230);
+    --roxa: rgb(131, 3, 131);
+    --amarela: rgb(255, 217, 0);
+    --verde: rgb(204, 238, 55);
+    --rosa: rgb(255, 82, 111);
+
+    /* CALÇAS */
+    --calca: rgb(51, 31, 99);
+    --calca2: #d4b089;
+    --calca3: rgb(51, 48, 48);
+
+    /* PELES */
+    --pele1: rgb(240, 177, 140);
+    --pele2: rgb(204, 110, 73);
+    --pele3: rgb(255, 157, 118);
+    --pele4: rgb(255, 203, 183);
+    --pele5: rgb(143, 78, 53);
+
+    /* CABELOS */
+    --cabelo2: rgb(255, 223, 45);
+    --cabelo3: rgb(255, 201, 101);
+    --cabelo4: rgb(37, 37, 37);
+    --cabelo5: rgb(191, 197, 202);
+
+    position: relative;
+    width: 120px;
+    height: 280px;
+    --pele: var(--pele1);
+    --cabelo: rgb(139, 57, 57);
+}
+
+/* CORPO */
+.personagem .corpo {
+    background: var(--camisa, var(--preta));
+    width: 80px;
+    height: 100px;
+    border-radius: 15px 15px 0 0;
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    z-index: 1;
+    border: 1px solid rgba(0, 0, 0, 0.363);
+    box-shadow: 0 0 5px,
+        inset 2px 2px 4px rgba(255, 255, 255, 0.13),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.315);
+}
+
+/* PELE */
+.personagem .cabeca,
+.personagem .braco-direito,
+.personagem .braco-esquerdo {
+    background: var(--pele);
+    box-shadow: 0 0 5px,
+        inset 2px 2px 4px rgba(255, 255, 255, 0.774),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.315);
+}
+
+/* CABEÇA */
+.personagem .cabeca {
+    height: 80px;
+    width: 80px;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 10;
+}
+
+/* CABELO MASCULINO */
+.personagem .cabelo {
+    height: 20px;
+    width: 80px;
+    position: absolute;
+    top: 0;
+    border-radius: 15px 15px 0 0;
+}
+
+.personagem .cabelo::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 80px;
+    height: 17px;
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 85% 100%, 70% 65%, 55% 100%, 40% 65%, 25% 100%, 10% 65%, 0 85%);
+}
+
+.personagem .cabelo,
+.personagem .cabelo::after {
+    background: var(--cabelo);
+}
+
+/* CABELO FEMININO */
+.personagem .cabelo-feminino {
+    display: none;
+    position: absolute;
+    top: -4px;
+    left: -5px;
+    width: 90px;
+    height: 100px;
+    z-index: 3;
+}
+
+.personagem .cabelo-feminino::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 80px;
+    height: 30px;
+    border-radius: 40px 40px 8px 8px;
+}
+
+.personagem .cabelo-feminino::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 8px;
+    width: 74px;
+    height: 17px;
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 85% 100%, 70% 65%, 55% 100%, 40% 65%, 25% 100%, 10% 65%, 0 85%);
+}
+
+.personagem .mecha-esquerda,
+.personagem .mecha-direita {
+    position: absolute;
+    top: 3px;
+    width: 14px;
+    height: 75px;
+    border-radius: 20px 20px 0 10px;
+}
+
+.personagem .mecha-esquerda { left: 0; }
+.personagem .mecha-direita { right: 0; }
+
+.personagem .cabelo-feminino::after,
+.personagem .cabelo-feminino::before,
+.personagem .mecha-direita,
+.personagem .mecha-esquerda {
+    background: var(--cabelo);
+}
+
+/* OLHOS */
+.personagem .olho-esquerdo,
+.personagem .olho-direito {
+    background: rgb(0, 0, 0);
+    height: 25px;
+    width: 8px;
+    border-radius: 3px;
+    position: absolute;
+    top: 30px;
+    animation: piscar 4s infinite;
+    transform-origin: center;
+}
+
+.personagem .olho-esquerdo { left: 20px; }
+.personagem .olho-direito { right: 20px; }
+
+/* BRAÇOS */
+.personagem .braco-esquerdo,
+.personagem .braco-direito {
+    width: 20px;
+    height: 90px;
+    position: absolute;
+    top: 3px;
+}
+
+.personagem .braco-esquerdo { left: -20px; border-radius: 8px 4px 5px 5px; }
+.personagem .braco-direito { right: -20px; border-radius: 4px 8px 5px 5px; }
+
+/* PERNAS */
+.personagem .pernas {
+    position: absolute;
+    top: 180px;
+    left: 20px;
+    width: 80px;
+    height: 100px;
+}
+
+.personagem .perna-esquerda,
+.personagem .perna-direita {
+    background: var(--calca);
+    width: 35px;
+    height: 100px;
+    position: absolute;
+    border-radius: 0 0 7px 7px;
+    border: 1px solid;
+    box-shadow: 0 0 5px,
+        inset 2px 2px 4px rgba(255, 255, 255, 0.068),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.315);
+}
+
+.personagem .perna-esquerda { left: 0; }
+.personagem .perna-direita { right: 0; }
+
+/* GÊNERO */
+.personagem.masculino .cabelo { display: block; }
+.personagem.masculino .cabelo-feminino { display: none; }
+.personagem.feminino .cabelo { display: none; }
+.personagem.feminino .cabelo-feminino { display: block; }

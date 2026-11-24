@@ -5,22 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conta</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/personagem.css">
     <link rel="stylesheet" href="css/conta.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>CONTA 👤</h1>
-    <div class="links">
-        <a href="vestiario.html">Vestiário 🎩</a>
-        <a href="loja.html">Loja 🛒</a>
-        <a href="index.html">MiniBlox 🎮</a>
-    </div>
+        <div class="links">
+            <a href="vestiario.html">Vestiário 🎩</a>
+            <a href="loja.html">Loja 🛒</a>
+            <a href="index.html">MiniBlox 🎮</a>
+        </div>
     </header>
 
-            <div class="bloqueado">
-            <h2>🔒</h2>
-            <h2>EM PRODUÇÃO!</h2>
-        </div>
+    <main>
+        <section class="perfil">
+
+            <!-- FOTO DE PERFIL: o boneco do usuário -->
+            <div class="avatar">
+                <div class="personagem masculino" id="personagem">
+                    <div class="cabeca">
+                        <div class="cabelo"></div>
+                        <div class="cabelo-feminino">
+                            <div class="mecha-esquerda"></div>
+                            <div class="mecha-direita"></div>
+                        </div>
+                        <div class="olho-esquerdo"></div>
+                        <div class="olho-direito"></div>
+                    </div>
+
+                    <div class="corpo">
+                        <div class="braco-esquerdo"></div>
+                        <div class="braco-direito"></div>
+                    </div>
+
+                    <div class="pernas">
+                        <div class="perna-esquerda"></div>
+                        <div class="perna-direita"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="perfil-nome" id="nomeUsuario">Jogador</h2>
+            <span class="etiqueta">🎮 Jogador MiniBlox</span>
+
+            <div class="acoes">
+                <a href="vestiario.html" class="btn">Editar boneco 🎩</a>
+                <a href="index.html" class="btn">Jogar 🎮</a>
+                <button type="button" class="btn btn-sair" id="btnSair">Sair 🚪</button>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="js/conta.js"></script>
 </body>
 </html>
