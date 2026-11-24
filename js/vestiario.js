@@ -129,26 +129,44 @@ calcaSelect.addEventListener('change', () => {
     select.dispatchEvent(new Event('change'));
 });
 
-salvarBtn.addEventListener('click', () => {
+salvarBtn.addEventListener('click', async () => {
 
-    const personagemSalvo = {
-
+    const novoPersonagem = {
         cabelo: cabeloSelect.value,
-
         corCabelo: corCabeloSelect.value,
-
         pele: peleSelect.value,
-
         camisa: camisaSelect.value,
-
         calca: calcaSelect.value
-
     };
 
-    localStorage.setItem(
-        'personagem',
-        JSON.stringify(personagemSalvo)
-    );
+    // Salva local (o vestiário carrega daqui na próxima abertura)
+    localStorage.setItem('personagem', JSON.stringify(novoPersonagem));
+
+    const nome = localStorage.getItem('nome');
+    const senha = sessionStorage.getItem('senha');
+
+    // Sem senha na sessão (ex.: recarregou a página), não dá para salvar no banco
+    if (!nome || !senha) {
+        alert('Sua sessão expirou. Entre novamente para salvar o personagem na sua conta.');
+        window.location.href = "index.html";
+        return;
+    }
+
+    salvarBtn.disabled = true;
+
+    const { error } = await db.rpc('salvar_personagem', {
+        p_nome: nome,
+        p_senha: senha,
+        p_personagem: novoPersonagem
+    });
+
+    salvarBtn.disabled = false;
+
+    if (error) {
+        console.error(error);
+        alert(traduzirErro(error));
+        return;
+    }
 
     alert('Personagem salvo com sucesso!');
     window.location.href = "index.html";

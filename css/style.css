@@ -49,7 +49,7 @@
 
 }
 
-.cadastro input[type="text"] {
+.cadastro input[type="text"],.password{
     border: 2px solid black;
     padding: .7rem;
     outline: none;
@@ -66,7 +66,7 @@
         font-family: "Space Grotesk", sans-serif;
 }
 
-.cadastro input[type="text"]:focus {
+.cadastro input[type="text"]:focus,.password:focus {
     box-shadow: 5px 5px 0 black;
 }
 
