@@ -62,6 +62,29 @@
 
 }
 
+#alternarBtn{
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 3px 0 black;
+    background-color: #5eff87;
+    cursor: pointer;
+    display: flex;
+    margin-top: 10px;
+    width: fit-content;
+    transition: .2s ease;
+}
+#alternarBtn:hover{
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 black;
+}
+#alternarBtn:active{
+    transform: translateY(3px);
+    box-shadow: 0 0px 0 black;
+}
+
 ::placeholder{
         font-family: "Space Grotesk", sans-serif;
 }
