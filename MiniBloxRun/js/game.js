@@ -819,11 +819,12 @@
     // 10. GAME OVER & PERSISTÊNCIA
     // -------------------------------------------------------
 
-    function encerrarPartida() {
+    async function encerrarPartida() {
         state.phase = 'gameover';
         if (rafId) {
             cancelAnimationFrame(rafId);
             rafId = null;
+
         }
 
         sound.stopMusic();
@@ -848,6 +849,9 @@
             newRecordBadge.classList.toggle('hidden', !isNovoRecorde);
             mostrarTela(gameOverScreen);
         }, 620);
+
+        await enviarPontuacao("miniblox_run", state.score);
+
     }
 
     // -------------------------------------------------------

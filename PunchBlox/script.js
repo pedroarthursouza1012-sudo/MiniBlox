@@ -1494,7 +1494,7 @@
         }
     }
 
-    function finishRound(winnerSlot) {
+    async function finishRound(winnerSlot) {
         const [f1, f2] = app.fighters;
         const winner = winnerSlot === 1 ? f1 : f2;
         const loser = winnerSlot === 1 ? f2 : f1;
@@ -1510,13 +1510,19 @@
         updateFightHud();
         audio.playRoundEnd();
 
-        if (app.p1RoundWins >= 2 || app.p2RoundWins >= 2) {
+if (app.p1RoundWins >= 2 || app.p2RoundWins >= 2) {
             app.mode = "match_end";
             app.matchEndTimer = 2.2;
             app.bannerText = `${winner.def.name.toUpperCase()} VENCEU!`;
             app.bannerSub = `${winner.playerName} é o campeão!`;
             audio.playVictory();
             setTimeout(() => audio.playDefeat(), 280);
+
+            if (!app.isTraining) {
+                const bonusInvicto = Math.abs(app.p1RoundWins - app.p2RoundWins) === 2 ? 50 : 0;
+                const pontuacaoFinalPunchBlox = 100 + Math.round(winner.hp) + bonusInvicto;
+                await enviarPontuacao("punch_blox", pontuacaoFinalPunchBlox);
+            }
         } else {
             app.mode = "round_end";
             app.roundEndTimer = 2.1;

@@ -1035,7 +1035,7 @@
         prepareCurrentPlayerTurn();
     }
 
-    function finishMatch() {
+     async function finishMatch() {
         const [p1, p2] = gameState.players;
 
         [p1, p2].forEach(p => {
@@ -1095,6 +1095,9 @@
 
         sound.playVictory();
         showScreen("results");
+
+        const pontuacaoFinalKnifeHit = winner ? winner.score : Math.max(p1.score, p2.score);
+        await enviarPontuacao("knife_hit", pontuacaoFinalKnifeHit);
     }
 
     /* =========================================================================

@@ -867,7 +867,7 @@
     return true;
   }
 
-  function endSingleGame(winnerIdx, reason) {
+   async function endSingleGame(winnerIdx, reason) {
     game.phase = 'GAME_OVER';
     SoundEngine.victory();
 
@@ -913,6 +913,11 @@
     el.btnVictoryRematch.textContent = seriesWon ? 'JOGAR NOVAMENTE' : 'REINICIAR SÉRIE';
 
     openModal(el.modals.victory);
+
+    const pontuacaoFinal8Ball = 100 + Math.max(0, 25 - game.playerShots[winnerIdx]) * 10;
+    await enviarPontuacao("8ball", pontuacaoFinal8Ball);
+
+
   }
 
   function getProfileById(id) {

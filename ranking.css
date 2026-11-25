@@ -1,0 +1,399 @@
+/* Ajustes específicos do ranking preservando o padrão visual do MiniBlox */
+
+body {
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.35) 2px, transparent 2px),
+        url("assets/1134126.png");
+}
+
+.hidden {
+    display: none !important;
+}
+
+.ranking-main {
+    padding: 1.5rem 2rem 3rem;
+}
+
+.ranking-painel {
+    width: min(100%, 1040px);
+    margin: 0 auto;
+    border: 3px solid black;
+    border-radius: 25px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    box-shadow: 8px 8px 0 black;
+    background: #F9FCFF;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    animation: fade-in .6s ease forwards;
+}
+
+/* TOPO DO PAINEL */
+.ranking-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid black;
+}
+
+.ranking-titulo-box h2 {
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    margin-bottom: .25rem;
+}
+
+.ranking-titulo-box p {
+    font-size: .95rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn-neo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    padding: .65rem 1.1rem;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 0 5px 0 black;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: bold;
+    font-size: .95rem;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.btn-neo:hover:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 black;
+}
+
+.btn-neo:active:not(:disabled) {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 black;
+}
+
+.btn-neo:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.btn-atualizar {
+    background: #ffcf40;
+}
+
+.btn-tentar {
+    background: rgb(255, 112, 112);
+}
+
+.btn-jogar {
+    background: rgb(187, 255, 98);
+}
+
+/* FILTROS DE MODALIDADES */
+.filtros-modalidade {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+}
+
+.filtro-btn {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: .5rem .9rem;
+    background: white;
+    box-shadow: 0 4px 0 black;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: .9rem;
+    color: black;
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+.filtro-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 black;
+    background: #eef8ff;
+}
+
+.filtro-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 black;
+}
+
+.filtro-btn.ativo {
+    background: #54ADFF;
+    color: black;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 black;
+}
+
+.filtro-btn[data-mod="pontuacao_geral"].ativo {
+    background: #ffcf40;
+}
+
+/* DESTAQUE DO JOGADOR AUTENTICADO */
+.meu-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .8rem;
+    padding: .9rem 1.2rem;
+    background: rgb(117, 227, 255);
+    border: 3px solid black;
+    border-radius: 15px;
+    box-shadow: 5px 5px 0 black;
+}
+
+.meu-status-info {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.meu-status-tag {
+    background: #ffeb3c;
+    border: 2px solid black;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.meu-status-info strong {
+    font-size: 1.1rem;
+}
+
+.meu-status-numeros {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+
+.meu-status-pos {
+    background: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: .25rem .65rem;
+    font-weight: 700;
+}
+
+.meu-status-pts {
+    font-size: 1.15rem;
+}
+
+/* ESTADOS (CARREGANDO, ERRO, VAZIO) */
+.estado-caixa {
+    border: 3px solid black;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 0 black;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8rem;
+}
+
+.estado-erro {
+    background: #fff1f1;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 5px solid #e2e8f0;
+    border-top-color: #54ADFF;
+    border-right-color: #ffcf40;
+    border-radius: 50%;
+    animation: girar .75s linear infinite;
+}
+
+@keyframes girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* TABELA DO RANKING */
+.tabela-wrap {
+    border: 3px solid black;
+    border-radius: 18px;
+    overflow-x: auto;
+    box-shadow: 6px 6px 0 black;
+    background: white;
+}
+
+.ranking-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.ranking-tabela thead th {
+    background: #54ADFF;
+    color: black;
+    padding: .95rem 1.1rem;
+    font-size: .95rem;
+    font-weight: 700;
+    border-bottom: 3px solid black;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.ranking-tabela tbody tr {
+    border-bottom: 2px solid #e2e8f0;
+    transition: background-color .15s ease;
+}
+
+.ranking-tabela tbody tr:last-child {
+    border-bottom: none;
+}
+
+.ranking-tabela tbody tr:hover {
+    background-color: #f1f8ff;
+}
+
+.ranking-tabela td {
+    padding: .9rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.col-pos {
+    width: 130px;
+}
+
+.col-pts {
+    width: 190px;
+    text-align: right;
+}
+
+.ranking-tabela td.celula-pts {
+    text-align: right;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* TOP 3 E DESTAQUE DO USUÁRIO */
+.pos-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .25rem .7rem;
+    border: 2px solid black;
+    border-radius: 8px;
+    background: #f1f5f9;
+    font-weight: 700;
+    min-width: 58px;
+    justify-content: center;
+}
+
+.ranking-tabela tbody tr.top-1 {
+    background: #fff9db;
+}
+.ranking-tabela tbody tr.top-1 .pos-badge {
+    background: #ffcf40;
+    box-shadow: 2px 2px 0 black;
+}
+
+.ranking-tabela tbody tr.top-2 {
+    background: #f8fafc;
+}
+.ranking-tabela tbody tr.top-2 .pos-badge {
+    background: #dbeafe;
+    box-shadow: 2px 2px 0 black;
+}
+
+.ranking-tabela tbody tr.top-3 {
+    background: #fff4ec;
+}
+.ranking-tabela tbody tr.top-3 .pos-badge {
+    background: #ffb37a;
+    box-shadow: 2px 2px 0 black;
+}
+
+.ranking-tabela tbody tr.minha-linha {
+    background: #dff8ff;
+    outline: 2px solid black;
+}
+
+.voce-tag {
+    display: inline-block;
+    margin-left: .5rem;
+    padding: 2px 8px;
+    border: 2px solid black;
+    border-radius: 999px;
+    background: #5eff87;
+    font-size: .72rem;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+/* RODAPÉ DO PAINEL */
+.ranking-rodape {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+    font-size: .88rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 700px) {
+    header {
+        width: calc(100% - 2rem);
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .links {
+        margin-left: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .links a {
+        font-size: .85rem;
+    }
+
+    .ranking-main {
+        padding: 1rem;
+    }
+
+    .filtros-modalidade {
+        gap: .5rem;
+    }
+
+    .filtro-btn {
+        font-size: .82rem;
+        padding: .42rem .72rem;
+    }
+
+    .ranking-tabela thead th,
+    .ranking-tabela td {
+        padding: .75rem .7rem;
+        font-size: .9rem;
+    }
+
+    .col-pos {
+        width: 95px;
+    }
+
+    .col-pts {
+        width: 130px;
+    }
+}w

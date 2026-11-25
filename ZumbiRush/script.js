@@ -1148,7 +1148,7 @@
         startWave(state.wave + 1);
     }
 
-    function triggerGameOver() {
+    async function triggerGameOver() {
         state.phase = "GAMEOVER";
         state.keysDown.clear();
         state.activeSwing = null;
@@ -1210,6 +1210,8 @@
         dom.goRecord.textContent = `${zrData.record.bestWave} ${zrData.record.bestWave === 1 ? "Wave" : "Waves"}`;
 
         dom.overlayGameover.classList.remove("hidden");
+
+        await enviarPontuacao("zombie_rush", state.score);
     }
 
     /* =========================================================================

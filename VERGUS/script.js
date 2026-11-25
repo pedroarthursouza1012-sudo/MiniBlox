@@ -1527,7 +1527,7 @@
         save.history = save.history.slice(0, 60);
     }
 
-    function completeCurrentLevel() {
+    async function completeCurrentLevel() {
         audio.playLevelClear();
 
         if (game.isInfinite) {
@@ -1587,6 +1587,8 @@
         );
         persistSave();
 
+        await enviarPontuacao("vergus", totalLevelScore);
+
         const rank = totalLevelScore >= 520 ? "RANK S" : totalLevelScore >= 380 ? "RANK A" : "RANK B";
 
         if (lvlId === 10) {
@@ -1611,7 +1613,7 @@
         dom.overlayClear.classList.remove("hidden");
     }
 
-    function triggerGameOver(reasonText) {
+    async function triggerGameOver(reasonText) {
         game.appState = "gameover";
         audio.playGameOver();
 
@@ -1654,8 +1656,12 @@
             dom.goModeLabel.textContent = `Fase ${String(game.levelDef.id).padStart(2, "0")}`;
         }
 
-        dom.overlayGameover.classList.remove("hidden");
-    }
+dom.overlayGameover.classList.remove("hidden");
+
+        const pontuacaoVergusGameOver = game.isInfinite
+            ? (game.infiniteRunScore + game.score)
+            : game.score;
+        await enviarPontuacao("vergus", pontuacaoVergusGameOver);    }
 
     /* =========================================================================
        10. UPDATE & RENDER (CANVAS 2D + PARTÍCULAS)

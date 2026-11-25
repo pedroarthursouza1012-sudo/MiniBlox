@@ -1718,15 +1718,20 @@
         audio.playHalftimeEnd();
     }
 
-    function finishMatch() {
+     async function finishMatch() {
         state.mode = "finalizado";
         state.keys.clear();
         audio.playMatchEnd();
 
         // Garante que cada partida finalizada seja gravada apenas 1 vez
         if (!state.matchSavedToHistory) {
-            state.matchSavedToHistory = true;
+                state.matchSavedToHistory = true;
             recordFinishedMatch(state.p1, state.p2);
+
+            const maiorPlacar = Math.max(state.p1.score, state.p2.score);
+            const bonusResultado = state.p1.score !== state.p2.score ? 100 : 50;
+            const pontuacaoFinalFutBlox = maiorPlacar * 100 + bonusResultado;
+            await enviarPontuacao("futblox", pontuacaoFinalFutBlox);
         }
 
         const c1 = getClubById(state.p1.clubId);

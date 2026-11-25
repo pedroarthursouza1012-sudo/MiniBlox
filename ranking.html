@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking — MiniBlox</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="ranking.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>RANKING 🏆</h1>
+        <div class="links">
+            <a href="vestiario.html">Vestiário 🎩</a>
+            <a href="loja.html">Loja 🛒</a>
+            <a href="conta.html">Conta 👤</a>
+            <a href="index.html">MiniBlox 🎮</a>
+            
+        </div>
+    </header>
+
+    <main class="ranking-main">
+        <section class="painel ranking-painel">
+            <div class="ranking-topo">
+                <div class="ranking-titulo-box">
+                    <h2 id="tituloModalidade">Ranking Geral 🏆</h2>
+                    <p id="subtituloModalidade">Soma das pontuações máximas de todos os jogos do MiniBlox.</p>
+                </div>
+
+                <div class="ranking-acoes-topo">
+                    <button type="button" id="btnAtualizar" class="btn-neo btn-atualizar">
+                        Atualizar 🔄
+                    </button>
+                </div>
+            </div>
+
+            <div class="filtros-modalidade" id="filtrosModalidade" role="tablist" aria-label="Selecionar modalidade do ranking">
+                <button type="button" class="filtro-btn ativo" data-mod="pontuacao_geral" role="tab" aria-selected="true">
+                    Geral 🏆
+                </button>
+                <button type="button" class="filtro-btn" data-mod="miniblox_run" role="tab" aria-selected="false">
+                    MiniBlox Run
+                </button>
+                <button type="button" class="filtro-btn" data-mod="antigravity" role="tab" aria-selected="false">
+                    Antigravity
+                </button>
+                <button type="button" class="filtro-btn" data-mod="8ball" role="tab" aria-selected="false">
+                    8ball
+                </button>
+                <button type="button" class="filtro-btn" data-mod="knife_hit" role="tab" aria-selected="false">
+                    Knife Hit
+                </button>
+                <button type="button" class="filtro-btn" data-mod="zombie_rush" role="tab" aria-selected="false">
+                    Zombie Rush
+                </button>
+                <button type="button" class="filtro-btn" data-mod="futblox" role="tab" aria-selected="false">
+                    Futblox
+                </button>
+                <button type="button" class="filtro-btn" data-mod="vergus" role="tab" aria-selected="false">
+                    Vergus
+                </button>
+                <button type="button" class="filtro-btn" data-mod="punch_blox" role="tab" aria-selected="false">
+                    Punch Blox
+                </button>
+            </div>
+
+            <div class="meu-status hidden" id="meuStatus">
+                <div class="meu-status-info">
+                    <span class="meu-status-tag">SUA POSIÇÃO</span>
+                    <strong id="meuStatusNome">Jogador</strong>
+                </div>
+                <div class="meu-status-numeros">
+                    <span class="meu-status-pos" id="meuStatusPos">—</span>
+                    <strong class="meu-status-pts" id="meuStatusPts">0 pts</strong>
+                </div>
+            </div>
+
+            <div class="estado-caixa" id="estadoCarregando">
+                <div class="spinner" aria-hidden="true"></div>
+                <p>Carregando classificação...</p>
+            </div>
+
+            <div class="estado-caixa estado-erro hidden" id="estadoErro">
+                <h3>Erro ao carregar o ranking ⚠️</h3>
+                <p id="mensagemErro">Não foi possível conectar ao servidor.</p>
+                <button type="button" id="btnTentarNovamente" class="btn-neo btn-tentar">
+                    Tentar novamente ↻
+                </button>
+            </div>
+
+            <div class="estado-caixa estado-vazio hidden" id="estadoVazio">
+                <h3>Nenhuma pontuação registrada 🎯</h3>
+                <p>Ainda não há jogadores pontuando nesta modalidade. Jogue uma partida para estrear o placar!</p>
+                <a href="index.html" class="btn-neo btn-jogar">Ir para os Jogos 🎮</a>
+            </div>
+
+            <div class="tabela-wrap hidden" id="tabelaWrap">
+                <table class="ranking-tabela">
+                    <thead>
+                        <tr>
+                            <th class="col-pos">Posição</th>
+                            <th class="col-nome">Jogador</th>
+                            <th class="col-pts">Pontuação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingTbody"></tbody>
+                </table>
+            </div>
+
+            <div class="ranking-rodape">
+                <span id="totalJogadoresLabel">0 jogadores ranqueados</span>
+                <span id="ultimaAtualizacaoLabel">Atualizado agora</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="ranking.js"></script>
+</body>
+</html>

@@ -928,7 +928,7 @@
     // 12. GAME OVER
     // -------------------------------------------------------
 
-    function encerrarPartida() {
+    async function encerrarPartida() {
         state.phase = 'gameover';
         if (rafId) {
             cancelAnimationFrame(rafId);
@@ -967,6 +967,8 @@
             newRecordBadge.classList.toggle('hidden', !novoRecorde);
             mostrarTela(gameOverScreen);
         }, 580);
+
+        await enviarPontuacao("antigravity", state.score);
     }
 
     // -------------------------------------------------------
